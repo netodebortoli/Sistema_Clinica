@@ -1,4 +1,3 @@
-
 package Interface;
 
 public class FrmPrincipal extends javax.swing.JFrame {
@@ -13,8 +12,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuCadastro = new javax.swing.JMenu();
-        mnuCad_Medico = new javax.swing.JMenuItem();
-        mnuCad_Paciente = new javax.swing.JMenuItem();
+        mnuPessoa = new javax.swing.JMenuItem();
         mnuPesq = new javax.swing.JMenu();
         mnuPesq_Consulta = new javax.swing.JMenuItem();
         mnuPesq_Paciente = new javax.swing.JMenuItem();
@@ -22,21 +20,23 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sisclinica ");
+        setResizable(false);
 
+        mnuCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/imagens/add.png"))); // NOI18N
         mnuCadastro.setText("Cadastro");
-
-        mnuCad_Medico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/imagens/add.png"))); // NOI18N
-        mnuCad_Medico.setText("Médico");
-        mnuCadastro.add(mnuCad_Medico);
-
-        mnuCad_Paciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/imagens/add.png"))); // NOI18N
-        mnuCad_Paciente.setText("Paciente");
-        mnuCad_Paciente.addActionListener(new java.awt.event.ActionListener() {
+        mnuCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuCad_PacienteActionPerformed(evt);
+                mnuCadastroActionPerformed(evt);
             }
         });
-        mnuCadastro.add(mnuCad_Paciente);
+
+        mnuPessoa.setText("Pessoa");
+        mnuPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuPessoaActionPerformed(evt);
+            }
+        });
+        mnuCadastro.add(mnuPessoa);
 
         jMenuBar1.add(mnuCadastro);
 
@@ -88,10 +88,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_mnuPesq_ConsultaActionPerformed
 
-    private void mnuCad_PacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCad_PacienteActionPerformed
-        DlgCadPaciente objCadPaciente = new DlgCadPaciente(this, true);
-        objCadPaciente.setVisible(true);
-    }//GEN-LAST:event_mnuCad_PacienteActionPerformed
+    private void mnuPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuPessoaActionPerformed
+        DlgCad obj = new DlgCad(this, true);
+        obj.setVisible(true);
+    }//GEN-LAST:event_mnuPessoaActionPerformed
+
+    private void mnuCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadastroActionPerformed
+
+    }//GEN-LAST:event_mnuCadastroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -125,11 +129,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem mnuCad_Medico;
-    private javax.swing.JMenuItem mnuCad_Paciente;
     private javax.swing.JMenu mnuCadastro;
     private javax.swing.JMenu mnuPesq;
     private javax.swing.JMenuItem mnuPesq_Consulta;
     private javax.swing.JMenuItem mnuPesq_Paciente;
+    private javax.swing.JMenuItem mnuPessoa;
     // End of variables declaration//GEN-END:variables
 }
