@@ -12,7 +12,7 @@
             <url>file:${project.basedir}/lib</url>
         </repository>
     </repositories>
-    <dependencies>
+     <dependencies>
         <dependency>
             <groupId>unknown.binary</groupId>
             <artifactId>AbsoluteLayout</artifactId>

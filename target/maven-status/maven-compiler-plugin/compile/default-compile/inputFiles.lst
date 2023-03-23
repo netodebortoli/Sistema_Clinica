@@ -1,4 +1,9 @@
-C:\Users\Admin\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Interface\DlgCadMedico.java
-C:\Users\Admin\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Interface\DlgCadPaciente.java
-C:\Users\Admin\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Interface\DlgCad.java
-C:\Users\Admin\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Interface\FrmPrincipal.java
+C:\Users\Admin\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Janelas\DlgCadMedico.java
+C:\Users\Admin\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Janelas\DlgAgendarConsulta.java
+C:\Users\Admin\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Dominio\Pessoa.java
+C:\Users\Admin\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Dominio\Consulta.java
+C:\Users\Admin\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Dominio\Paciente.java
+C:\Users\Admin\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Dominio\Medico.java
+C:\Users\Admin\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Janelas\DlgCadPaciente.java
+C:\Users\Admin\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Dominio\Modalidade.java
+C:\Users\Admin\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Janelas\FrmPrincipal.java
