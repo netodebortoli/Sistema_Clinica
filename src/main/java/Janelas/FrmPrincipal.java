@@ -1,8 +1,13 @@
 package Janelas;
 
+import Controle.GerenciadorInterface;
+
 public class FrmPrincipal extends javax.swing.JFrame {
 
-    public FrmPrincipal() {
+    private GerenciadorInterface gerInterfaceGrafica;
+
+    public FrmPrincipal(GerenciadorInterface newGerenciadorInferface) {
+        gerInterfaceGrafica = newGerenciadorInferface;
         initComponents();
     }
 
@@ -12,11 +17,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuCad = new javax.swing.JMenu();
-        mnuCadPessoa = new javax.swing.JMenuItem();
+        mnuCadPaciente = new javax.swing.JMenuItem();
         mnuCadMed = new javax.swing.JMenuItem();
         mnuConsulta = new javax.swing.JMenu();
-        mnuConsAgendar = new javax.swing.JMenuItem();
-        mnuConsListar = new javax.swing.JMenuItem();
+        mnuConsultaAgendar = new javax.swing.JMenuItem();
+        mnuConsultaListar = new javax.swing.JMenuItem();
         mnuBusca = new javax.swing.JMenu();
         mnuBuscarPessoas = new javax.swing.JMenuItem();
 
@@ -26,13 +31,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         mnuCad.setText("Cadastro");
 
-        mnuCadPessoa.setText("Pessoa");
-        mnuCadPessoa.addActionListener(new java.awt.event.ActionListener() {
+        mnuCadPaciente.setText("Paciente");
+        mnuCadPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuCadPessoaActionPerformed(evt);
+                mnuCadPacienteActionPerformed(evt);
             }
         });
-        mnuCad.add(mnuCadPessoa);
+        mnuCad.add(mnuCadPaciente);
 
         mnuCadMed.setText("Médico");
         mnuCadMed.addActionListener(new java.awt.event.ActionListener() {
@@ -45,27 +50,22 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(mnuCad);
 
         mnuConsulta.setText("Consulta Médica");
-        mnuConsulta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuConsultaActionPerformed(evt);
-            }
-        });
 
-        mnuConsAgendar.setText("Agendar");
-        mnuConsAgendar.addActionListener(new java.awt.event.ActionListener() {
+        mnuConsultaAgendar.setText("Agendar");
+        mnuConsultaAgendar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuConsAgendarActionPerformed(evt);
+                mnuConsultaAgendarActionPerformed(evt);
             }
         });
-        mnuConsulta.add(mnuConsAgendar);
+        mnuConsulta.add(mnuConsultaAgendar);
 
-        mnuConsListar.setText("Listar");
-        mnuConsListar.addActionListener(new java.awt.event.ActionListener() {
+        mnuConsultaListar.setText("Listar");
+        mnuConsultaListar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuConsListarActionPerformed(evt);
+                mnuConsultaListarActionPerformed(evt);
             }
         });
-        mnuConsulta.add(mnuConsListar);
+        mnuConsulta.add(mnuConsultaListar);
 
         jMenuBar1.add(mnuConsulta);
 
@@ -97,64 +97,25 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mnuCadPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadPessoaActionPerformed
-        DlgCadPaciente objCadPaciente = new DlgCadPaciente(this, true);
-        objCadPaciente.setVisible(true);
-    }//GEN-LAST:event_mnuCadPessoaActionPerformed
+    private void mnuCadPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadPacienteActionPerformed
+        gerInterfaceGrafica.abrirDlgCadPaciente();
+    }//GEN-LAST:event_mnuCadPacienteActionPerformed
 
     private void mnuCadMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadMedActionPerformed
-        DlgCadMedico objCadMedico = new DlgCadMedico(this, true);
-        objCadMedico.setVisible(true);
+        gerInterfaceGrafica.abrirDlgCadMedico();
     }//GEN-LAST:event_mnuCadMedActionPerformed
 
-    private void mnuConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsultaActionPerformed
-       DlgAgendarConsulta objCadConsulta = new DlgAgendarConsulta(this, true);
-       objCadConsulta.setVisible(true);
-    }//GEN-LAST:event_mnuConsultaActionPerformed
+    private void mnuConsultaListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsultaListarActionPerformed
+        gerInterfaceGrafica.abrirDlgListarConsultas();
+    }//GEN-LAST:event_mnuConsultaListarActionPerformed
 
-    private void mnuConsListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsListarActionPerformed
-        DlgListarConsultas objListarConsultas = new DlgListarConsultas(this, true);
-        objListarConsultas.setVisible(true);
-    }//GEN-LAST:event_mnuConsListarActionPerformed
-
-    private void mnuConsAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsAgendarActionPerformed
-        DlgAgendarConsulta objAgConsulta = new DlgAgendarConsulta(this, true);
-        objAgConsulta.setVisible(true);
-    }//GEN-LAST:event_mnuConsAgendarActionPerformed
+    private void mnuConsultaAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsultaAgendarActionPerformed
+        gerInterfaceGrafica.abrirDlgAgendarConsulta();
+    }//GEN-LAST:event_mnuConsultaAgendarActionPerformed
 
     private void mnuBuscarPessoasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuBuscarPessoasActionPerformed
-        DlgBuscarPessoa objBuscaPessoa = new DlgBuscarPessoa(this, true);
-        objBuscaPessoa.setVisible(true);
+        gerInterfaceGrafica.abrirDlgBuscarPessoa();
     }//GEN-LAST:event_mnuBuscarPessoasActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmPrincipal().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
@@ -162,9 +123,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuBuscarPessoas;
     private javax.swing.JMenu mnuCad;
     private javax.swing.JMenuItem mnuCadMed;
-    private javax.swing.JMenuItem mnuCadPessoa;
-    private javax.swing.JMenuItem mnuConsAgendar;
-    private javax.swing.JMenuItem mnuConsListar;
+    private javax.swing.JMenuItem mnuCadPaciente;
     private javax.swing.JMenu mnuConsulta;
+    private javax.swing.JMenuItem mnuConsultaAgendar;
+    private javax.swing.JMenuItem mnuConsultaListar;
     // End of variables declaration//GEN-END:variables
 }
