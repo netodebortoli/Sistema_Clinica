@@ -14,13 +14,15 @@ public class Consulta {
     private Medico medico;
     private Paciente paciente;
     private Modalidade modalidade;
-
-    public Consulta(Date data, String horario, Medico medico, Paciente paciente, Modalidade modalidade) {
+    private boolean concluida;
+    
+    public Consulta(Date data, String horario, Medico medico, Paciente paciente, Modalidade modalidade, boolean concluida) {
         this.data = data;
         this.horario = horario;
         this.medico = medico;
         this.paciente = paciente;
         this.modalidade = modalidade;
+        this.concluida = concluida;
     }
 
     public int getId_consulta() {
@@ -69,5 +71,13 @@ public class Consulta {
 
     public void setModalidade(Modalidade modalidade) {
         this.modalidade = modalidade;
+    }
+
+    public boolean isConcluida() {
+        return concluida;
+    }
+
+    public void setConcluida(boolean concluida) {
+        this.concluida = concluida;
     }
 }

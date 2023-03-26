@@ -17,9 +17,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mnuConsulta = new javax.swing.JMenu();
         mnuConsAgendar = new javax.swing.JMenuItem();
         mnuConsListar = new javax.swing.JMenuItem();
+        mnuBusca = new javax.swing.JMenu();
+        mnuBuscarPessoas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Sisclinica ");
+        setTitle("Sisclinica - Menu Principal");
         setResizable(false);
 
         mnuCad.setText("Cadastro");
@@ -42,7 +44,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(mnuCad);
 
-        mnuConsulta.setText("Consulta");
+        mnuConsulta.setText("Consulta Médica");
         mnuConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuConsultaActionPerformed(evt);
@@ -66,6 +68,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mnuConsulta.add(mnuConsListar);
 
         jMenuBar1.add(mnuConsulta);
+
+        mnuBusca.setText("Buscar");
+
+        mnuBuscarPessoas.setText("Pessoas");
+        mnuBuscarPessoas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuBuscarPessoasActionPerformed(evt);
+            }
+        });
+        mnuBusca.add(mnuBuscarPessoas);
+
+        jMenuBar1.add(mnuBusca);
 
         setJMenuBar(jMenuBar1);
 
@@ -99,13 +113,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuConsultaActionPerformed
 
     private void mnuConsListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsListarActionPerformed
-        // TODO add your handling code here:
+        DlgListarConsultas objListarConsultas = new DlgListarConsultas(this, true);
+        objListarConsultas.setVisible(true);
     }//GEN-LAST:event_mnuConsListarActionPerformed
 
     private void mnuConsAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsAgendarActionPerformed
         DlgAgendarConsulta objAgConsulta = new DlgAgendarConsulta(this, true);
         objAgConsulta.setVisible(true);
     }//GEN-LAST:event_mnuConsAgendarActionPerformed
+
+    private void mnuBuscarPessoasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuBuscarPessoasActionPerformed
+        DlgBuscarPessoa objBuscaPessoa = new DlgBuscarPessoa(this, true);
+        objBuscaPessoa.setVisible(true);
+    }//GEN-LAST:event_mnuBuscarPessoasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,6 +158,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu mnuBusca;
+    private javax.swing.JMenuItem mnuBuscarPessoas;
     private javax.swing.JMenu mnuCad;
     private javax.swing.JMenuItem mnuCadMed;
     private javax.swing.JMenuItem mnuCadPessoa;
