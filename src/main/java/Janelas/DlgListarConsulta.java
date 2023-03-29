@@ -1,7 +1,12 @@
-
 package Janelas;
 
 import Controle.GerenciadorInterface;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -10,7 +15,7 @@ import Controle.GerenciadorInterface;
 public class DlgListarConsulta extends javax.swing.JDialog {
 
     GerenciadorInterface gerIG;
-            
+
     public DlgListarConsulta(java.awt.Frame parent, boolean modal, GerenciadorInterface gerIG) {
         super(parent, modal);
         this.gerIG = gerIG;
@@ -41,7 +46,12 @@ public class DlgListarConsulta extends javax.swing.JDialog {
         setResizable(false);
 
         cbTipoConsulta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbTipoConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Data", "Médico", "Paciente", "Modalidade" }));
+        cbTipoConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "Data", "Médico", "Paciente", "Modalidade" }));
+        cbTipoConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoConsultaActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Pesquisar consulta por:");
@@ -77,8 +87,6 @@ public class DlgListarConsulta extends javax.swing.JDialog {
         btnPesquisar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnPesquisar.setForeground(new java.awt.Color(0, 51, 204));
         btnPesquisar.setText("Pesquisar");
-
-        txtPesquisa.setEnabled(false);
 
         btnCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCadastrar.setForeground(new java.awt.Color(255, 102, 0));
@@ -143,6 +151,23 @@ public class DlgListarConsulta extends javax.swing.JDialog {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void cbTipoConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoConsultaActionPerformed
+
+        try {
+            
+            txtPesquisa.setValue(null);
+            
+            if (cbTipoConsulta.getSelectedIndex() == 1) {
+                
+                txtPesquisa.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("##/##/####")));
+            } else {
+                txtPesquisa.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("************************")));
+            }
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Erro na pré-formatação no campo de pesquisa.");
+        }
+    }//GEN-LAST:event_cbTipoConsultaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
