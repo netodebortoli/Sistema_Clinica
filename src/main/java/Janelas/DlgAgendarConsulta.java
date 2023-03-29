@@ -89,7 +89,11 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("h");
 
+        cbPaciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maria Antonieta Gonçalves", "Marcos Gomes Pedro", "José Maria da Silva", "Aristídes Debortoli Neto" }));
+
         cbModalidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Odontologia", "Psiquiatria", "Fisoterapia\t", "Oncologia", "Oftamologia", "Pediatria" }));
+
+        cbMedico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Leon Kennedy", "Ashely Grahan", "Antônio Marcos Bandeira", "Esmeralda Costa Silvério" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -1,7 +1,7 @@
-
 package Janelas;
 
 import Controle.GerenciadorInterface;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -10,9 +10,10 @@ import Controle.GerenciadorInterface;
 public class DlgCadPaciente extends javax.swing.JDialog {
 
     GerenciadorInterface gerIG;
-    
+
     /**
      * Creates new form DlgCadPaciente
+     *
      * @param parent
      * @param modal
      */
@@ -31,6 +32,7 @@ public class DlgCadPaciente extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGrupoSexo = new javax.swing.ButtonGroup();
         pnDados = new javax.swing.JPanel();
         labelNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
@@ -66,7 +68,8 @@ public class DlgCadPaciente extends javax.swing.JDialog {
         txtCep = new javax.swing.JFormattedTextField();
         txtUf = new javax.swing.JFormattedTextField();
         painelObs = new javax.swing.JPanel();
-        txtAreaObs = new javax.swing.JFormattedTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtAreaObs = new javax.swing.JTextArea();
         btnLimpar = new javax.swing.JButton();
         btnCadastrar = new javax.swing.JButton();
 
@@ -80,8 +83,13 @@ public class DlgCadPaciente extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sexo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 2, 12))); // NOI18N
 
+        btnGrupoSexo.add(radioMasc);
+        radioMasc.setMnemonic('M');
         radioMasc.setText("Masculino");
 
+        btnGrupoSexo.add(radioFem);
+        radioFem.setMnemonic('F');
+        radioFem.setSelected(true);
         radioFem.setText("Feminino");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -362,25 +370,24 @@ public class DlgCadPaciente extends javax.swing.JDialog {
 
         painelObs.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Observações", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
-        try {
-            txtAreaObs.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("Doenças; histórico de problemas; etc.")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        txtAreaObs.setColumns(20);
+        txtAreaObs.setRows(5);
+        txtAreaObs.setToolTipText("Histórico de doenças, etc");
+        jScrollPane1.setViewportView(txtAreaObs);
 
         javax.swing.GroupLayout painelObsLayout = new javax.swing.GroupLayout(painelObs);
         painelObs.setLayout(painelObsLayout);
         painelObsLayout.setHorizontalGroup(
             painelObsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelObsLayout.createSequentialGroup()
+            .addGroup(painelObsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtAreaObs)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         painelObsLayout.setVerticalGroup(
             painelObsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelObsLayout.createSequentialGroup()
-                .addComponent(txtAreaObs, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -396,28 +403,32 @@ public class DlgCadPaciente extends javax.swing.JDialog {
         btnCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCadastrar.setForeground(new java.awt.Color(51, 102, 255));
         btnCadastrar.setText("Salvar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pnDados, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnInfoPessoal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(painelObs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pnEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(329, 329, 329)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnDados, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnInfoPessoal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(painelObs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(12, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(329, 329, 329)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -440,12 +451,74 @@ public class DlgCadPaciente extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private boolean validarCamposPreenchidos() {
+
+        boolean valido = true;
+
+        if (txtNome.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "O preenchimento do nome é obrigatório.");
+            valido = false;
+        }
+
+        // Fazer validação para Data de Nascimento (Campo formatado)
+        // Fazer Validação para CPF (Campo formatado)
+        
+        if (txtRg.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "O preenchimento do número de RG é obrigatório.");
+            valido = false;
+        }
+
+        if (txtEmail.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "O preenchimento do email é obrigatório.");
+            valido = false;
+        }
+
+        // Fazer Validação para Telefone (Campo formatado)
+        // Fazer Validação para Celular (Campo formatado)
+        // Fazer Validação para CEP (Campo formatado)
+        
+        if (txtCidade.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "O preenchimento do cidade é obrigatório.");
+            valido = false;
+        }
+
+        if (txtRua.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "O preenchimento do rua é obrigatório.");
+            valido = false;
+        }
+
+        if (txtNum.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "O preenchimento do número de casa é obrigatório.");
+            valido = false;
+        }
+
+        if (txtBairro.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "O preenchimento do bairro é obrigatório.");
+            valido = false;
+        }
+        
+        if (txtUf.getText().trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "O preenchimento da UF (Estado) é obrigatório.");
+            valido = false;      
+        }
+        
+        return valido;
+
+    }
+
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        if (validarCamposPreenchidos()) {
+            JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso.");
+        }
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.ButtonGroup btnGrupoSexo;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -462,6 +535,7 @@ public class DlgCadPaciente extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelNome;
     private javax.swing.JPanel painelObs;
     private javax.swing.JPanel pnDados;
@@ -469,7 +543,7 @@ public class DlgCadPaciente extends javax.swing.JDialog {
     private javax.swing.JPanel pnInfoPessoal;
     private javax.swing.JRadioButton radioFem;
     private javax.swing.JRadioButton radioMasc;
-    private javax.swing.JFormattedTextField txtAreaObs;
+    private javax.swing.JTextArea txtAreaObs;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JFormattedTextField txtCel;
     private javax.swing.JFormattedTextField txtCep;
