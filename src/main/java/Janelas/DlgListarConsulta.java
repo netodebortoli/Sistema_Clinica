@@ -66,6 +66,7 @@ public class DlgListarConsulta extends javax.swing.JDialog {
                 "Data", "Médico", "Paciente", "Modalidade"
             }
         ));
+        tblConsulta.setAutoscrolls(false);
         jScrollPane1.setViewportView(tblConsulta);
 
         javax.swing.GroupLayout pnlTabelaLayout = new javax.swing.GroupLayout(pnlTabela);
@@ -158,7 +159,7 @@ public class DlgListarConsulta extends javax.swing.JDialog {
             
             txtPesquisa.setValue(null);
             
-            if (cbTipoConsulta.getSelectedIndex() == 1) {
+            if (cbTipoConsulta.getSelectedItem().equals("Data")) {
                 
                 txtPesquisa.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("##/##/####")));
             } else {
