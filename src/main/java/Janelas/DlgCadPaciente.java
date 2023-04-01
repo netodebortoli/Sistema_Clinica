@@ -371,8 +371,10 @@ public class DlgCadPaciente extends javax.swing.JDialog {
         painelObs.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Observações", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         txtAreaObs.setColumns(20);
+        txtAreaObs.setLineWrap(true);
         txtAreaObs.setRows(5);
         txtAreaObs.setToolTipText("Histórico de doenças, etc");
+        txtAreaObs.setWrapStyleWord(true);
         jScrollPane1.setViewportView(txtAreaObs);
 
         javax.swing.GroupLayout painelObsLayout = new javax.swing.GroupLayout(painelObs);
@@ -414,20 +416,21 @@ public class DlgCadPaciente extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnDados, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnInfoPessoal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(painelObs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(12, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(329, 329, 329)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pnDados, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnInfoPessoal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(painelObs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(329, 329, 329)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -451,69 +454,12 @@ public class DlgCadPaciente extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private boolean validarCamposPreenchidos() {
-
-        boolean valido = true;
-
-        if (txtNome.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(this, "O preenchimento do nome é obrigatório.");
-            valido = false;
-        }
-
-        // Fazer validação para Data de Nascimento (Campo formatado)
-        // Fazer Validação para CPF (Campo formatado)
-        
-        if (txtRg.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(this, "O preenchimento do número de RG é obrigatório.");
-            valido = false;
-        }
-
-        if (txtEmail.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(this, "O preenchimento do email é obrigatório.");
-            valido = false;
-        }
-
-        // Fazer Validação para Telefone (Campo formatado)
-        // Fazer Validação para Celular (Campo formatado)
-        // Fazer Validação para CEP (Campo formatado)
-        
-        if (txtCidade.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(this, "O preenchimento do cidade é obrigatório.");
-            valido = false;
-        }
-
-        if (txtRua.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(this, "O preenchimento do rua é obrigatório.");
-            valido = false;
-        }
-
-        if (txtNum.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "O preenchimento do número de casa é obrigatório.");
-            valido = false;
-        }
-
-        if (txtBairro.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(this, "O preenchimento do bairro é obrigatório.");
-            valido = false;
-        }
-        
-        if (txtUf.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(this, "O preenchimento da UF (Estado) é obrigatório.");
-            valido = false;      
-        }
-        
-        return valido;
-
-    }
-
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
 
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        if (validarCamposPreenchidos()) {
-            JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso.");
-        }
+       
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

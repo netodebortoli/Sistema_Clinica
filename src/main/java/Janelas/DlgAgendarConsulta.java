@@ -46,7 +46,7 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
         pnAgendamentos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAgendamentos = new javax.swing.JTable();
-        btnCadastroConsulta = new javax.swing.JButton();
+        btnCadastrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sisclinica - Agendar Consulta");
@@ -95,25 +95,25 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
         tblAgendamentos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblAgendamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"30/03/2023", "07h", "Leon Kenndy", "Aristídes Debortoli Neto", "Odontologia"},
-                {null, "08h", null, null, null},
-                {null, "09h", null, null, null},
-                {null, "10h", null, null, null},
-                {null, "11h", null, null, null},
-                {null, "12h", null, null, null},
-                {null, "13h", null, null, null},
-                {null, "14h", null, null, null},
-                {"30/03/2023", "15h", "Ashely Graham", "José Maria da Silva", "Oftamologia"},
-                {"30/03/2023", "16h", "Ashley Graham", "Marcos Gomes Pedro", null},
-                {null, "17h", null, null, null},
-                {null, "18h", null, null, null}
+                {"07h", "", "", ""},
+                {"08h", null, null, null},
+                {"09h", null, null, null},
+                {"10h", null, null, null},
+                {"11h", null, null, null},
+                {"12h", null, null, null},
+                {"13h", null, null, null},
+                {"14h", null, null, null},
+                {"15h", "", "", ""},
+                {"16h", "", "", null},
+                {"17h", null, null, null},
+                {"18h", null, null, null}
             },
             new String [] {
-                "Data", "Horário", "Médico", "Paciente", "Modalidade"
+                "Horário", "Médico", "Paciente", "Modalidade"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -133,12 +133,12 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
 
         pnAgendamentos.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        btnCadastroConsulta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnCadastroConsulta.setForeground(new java.awt.Color(0, 51, 204));
-        btnCadastroConsulta.setText("Cadastrar Consulta");
-        btnCadastroConsulta.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnCadastrar.setForeground(new java.awt.Color(0, 51, 204));
+        btnCadastrar.setText("Cadastrar Consulta");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastroConsultaActionPerformed(evt);
+                btnCadastrarActionPerformed(evt);
             }
         });
 
@@ -148,9 +148,9 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
@@ -172,15 +172,13 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
                                 .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnBuscarConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pnAgendamentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(pnAgendamentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnCadastroConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(206, 206, 206))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lbTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,14 +202,14 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
                         .addComponent(cbPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtData)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnBuscarConsultas)
-                        .addComponent(jLabel5)
-                        .addComponent(txtData)))
+                        .addComponent(jLabel5)))
                 .addGap(18, 18, 18)
                 .addComponent(pnAgendamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCadastroConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9))
         );
 
@@ -222,14 +220,13 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
         
     }//GEN-LAST:event_btnBuscarConsultasActionPerformed
 
-    private void btnCadastroConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroConsultaActionPerformed
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
       
-    }//GEN-LAST:event_btnCadastroConsultaActionPerformed
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarConsultas;
     private javax.swing.JButton btnCadastrar;
-    private javax.swing.JButton btnCadastroConsulta;
     private javax.swing.JComboBox<String> cbMedico;
     private javax.swing.JComboBox<String> cbModalidade;
     private javax.swing.JComboBox<String> cbPaciente;
