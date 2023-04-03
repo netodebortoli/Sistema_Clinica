@@ -62,6 +62,7 @@ public class DlgBuscarPessoa extends javax.swing.JDialog {
         ));
         tblConsulta.setToolTipText("");
         tblConsulta.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+        tblConsulta.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblConsulta);
 
         javax.swing.GroupLayout pnlTabelaLayout = new javax.swing.GroupLayout(pnlTabela);

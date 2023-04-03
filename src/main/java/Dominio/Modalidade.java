@@ -1,9 +1,5 @@
 package Dominio;
 
-/**
- *
- * @author Admin
- */
 public class Modalidade {
 
     private String id_modalidade;

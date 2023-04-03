@@ -1,6 +1,9 @@
 package Janelas;
 
+import Controle.BuscaCEP;
+import Controle.FuncoesUteis;
 import Controle.GerenciadorInterface;
+import Dominio.Endereco;
 import javax.swing.JOptionPane;
 
 /**
@@ -303,6 +306,11 @@ public class DlgCadPaciente extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCep.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCepFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnEnderecoLayout = new javax.swing.GroupLayout(pnEndereco);
         pnEndereco.setLayout(pnEnderecoLayout);
@@ -458,9 +466,111 @@ public class DlgCadPaciente extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnLimparActionPerformed
 
+    private boolean validarCamposPreenchidos() {
+
+        boolean valido = true;
+        String erro = "";
+
+        if (txtNome.getText().trim().length() == 0) {
+            erro = "O preenchimento do nome é obrigatório.\n";
+            valido = false;
+        }
+
+        if (txtDataNascimento.getText().replace("/", "").trim().length() == 0) {
+            erro += "O preenchimento da data de nascimento é obrigatório.\n";
+            valido = false;
+        }
+    
+        if (FuncoesUteis.isCPF(txtCpf.getText()) == false) {
+            erro += "CPF inválido.\n";
+            valido = false;
+        }
+
+        if (txtRg.getText().trim().length() == 0) {
+            erro += "O preenchimento do número de RG é obrigatório.\n";
+            valido = false;
+        }
+
+        if (txtEmail.getText().trim().length() == 0) {
+            erro += "O preenchimento do email é obrigatório.\n";
+            valido = false;
+        }
+
+        String celular = txtCel.getText();
+        String telefone = txtTel.getText();
+
+        celular = celular.replace("(", "");
+        celular = celular.replace(")", "");
+        celular = celular.replace("-", "");
+        telefone = telefone.replace("(", "");
+        telefone = telefone.replace(")", "");
+        telefone = telefone.replace("-", "");
+
+        if (telefone.trim().length() == 0 && celular.trim().length() == 0) {
+            erro += "O preenchimento de ao menos um número de contato é obrigatório.\n";
+            valido = false;
+        } else {
+            if (telefone.trim().length() < 10) {
+                erro += "Número de telefone inválido.\n";
+                valido = false;
+            }
+            if (celular.trim().length() < 10) {
+                erro += "Número de celular inválido.\n";
+                valido = false;
+            }
+        }
+
+        if (txtCep.getText().replace("-", "").trim().length() == 0) {
+            erro += "Número de CEP inválido.\n";
+            valido = false;
+        }
+
+        if (txtCidade.getText().trim().length() == 0) {
+            erro += "O preenchimento do cidade é obrigatório.\n";
+            valido = false;
+        }
+
+        if (txtRua.getText().trim().length() == 0) {
+            erro += "O preenchimento do rua é obrigatório.\n";
+            valido = false;
+        }
+
+        if (txtNum.getText().trim().isEmpty()) {
+            erro += "O preenchimento do número de casa é obrigatório.\n";
+            valido = false;
+        }
+
+        if (txtBairro.getText().trim().length() == 0) {
+            erro += "O preenchimento do bairro é obrigatório.\n";
+            valido = false;
+        }
+
+        if (txtUf.getText().trim().length() == 0) {
+            erro += "O preenchimento da UF (Estado) é obrigatório.\n";
+            valido = false;
+        }
+
+        JOptionPane.showMessageDialog(this, erro, "Dados de cadastro inválidos.", JOptionPane.ERROR_MESSAGE);
+        return valido;
+    }
+
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-       
+        if (validarCamposPreenchidos()) {
+            JOptionPane.showMessageDialog(this, "Cadastrado.");
+        }
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void txtCepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCepFocusLost
+//        
+//        Endereco ender = BuscaCEP.getEnderecoPorCep(txtCep.getText().replace("-", ""));
+//                
+//        if ( ender != null ){
+//            txtRua.setText( ender.getLogradouro());
+//            txtBairro.setText( ender.getBairro());
+//            txtCidade.setText( ender.getCidade());
+//            txtUf.setText(ender.getUf());
+//        }
+    }//GEN-LAST:event_txtCepFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;

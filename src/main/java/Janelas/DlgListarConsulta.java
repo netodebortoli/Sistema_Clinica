@@ -67,6 +67,7 @@ public class DlgListarConsulta extends javax.swing.JDialog {
             }
         ));
         tblConsulta.setAutoscrolls(false);
+        tblConsulta.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblConsulta);
 
         javax.swing.GroupLayout pnlTabelaLayout = new javax.swing.GroupLayout(pnlTabela);

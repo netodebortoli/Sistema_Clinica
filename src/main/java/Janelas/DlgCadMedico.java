@@ -1,7 +1,8 @@
-
 package Janelas;
 
+import Controle.FuncoesUteis;
 import Controle.GerenciadorInterface;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -10,7 +11,7 @@ import Controle.GerenciadorInterface;
 public class DlgCadMedico extends javax.swing.JDialog {
 
     GerenciadorInterface gerIG;
-    
+
     public DlgCadMedico(java.awt.Frame parent, boolean modal, GerenciadorInterface gerIG) {
         super(parent, modal);
         this.gerIG = gerIG;
@@ -62,12 +63,12 @@ public class DlgCadMedico extends javax.swing.JDialog {
         txtCel = new javax.swing.JFormattedTextField();
         painelDadosProfissionais2 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
-        txtCrm2 = new javax.swing.JFormattedTextField();
+        txtCrm = new javax.swing.JFormattedTextField();
         jLabel19 = new javax.swing.JLabel();
-        txtUfCRM2 = new javax.swing.JTextField();
+        txtUfCrm = new javax.swing.JTextField();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        listaEspecialidades = new javax.swing.JList<>();
         btnLimpar = new javax.swing.JButton();
         btnCadastrar = new javax.swing.JButton();
 
@@ -81,6 +82,7 @@ public class DlgCadMedico extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sexo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 2, 12))); // NOI18N
 
+        radioMasc.setSelected(true);
         radioMasc.setText("Masculino");
 
         radioFem.setText("Feminino");
@@ -366,19 +368,23 @@ public class DlgCadMedico extends javax.swing.JDialog {
 
         jLabel18.setText("CRM");
 
-        txtCrm2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        try {
+            txtCrm.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("######")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         jLabel19.setText("UF");
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), "Especialidades", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 2, 12))); // NOI18N
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Odontologia", "Psiquiatria", "Fisoterapia\t", "Oncologia", "Oftamologia", "Pediatria" };
+        listaEspecialidades.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Odontologia", "Psiquiatria", "Fisoterapia\t", "Oncologia", "Oftamologia", "Pediatria", "Clínico Geral" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jList1.setLayoutOrientation(javax.swing.JList.VERTICAL_WRAP);
-        jScrollPane1.setViewportView(jList1);
+        listaEspecialidades.setLayoutOrientation(javax.swing.JList.VERTICAL_WRAP);
+        jScrollPane1.setViewportView(listaEspecialidades);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -408,8 +414,8 @@ public class DlgCadMedico extends javax.swing.JDialog {
                     .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(painelDadosProfissionais2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUfCRM2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCrm2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUfCrm, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCrm, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(8, Short.MAX_VALUE))
@@ -419,12 +425,12 @@ public class DlgCadMedico extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelDadosProfissionais2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(painelDadosProfissionais2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtCrm2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCrm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18))
                 .addGap(29, 29, 29)
                 .addGroup(painelDadosProfissionais2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
-                    .addComponent(txtUfCRM2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUfCrm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(60, 60, 60))
             .addGroup(painelDadosProfissionais2Layout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -443,6 +449,11 @@ public class DlgCadMedico extends javax.swing.JDialog {
         btnCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCadastrar.setForeground(new java.awt.Color(51, 102, 255));
         btnCadastrar.setText("Salvar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -490,6 +501,115 @@ public class DlgCadMedico extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLimparActionPerformed
 
+    private boolean validarCamposPreenchidos() {
+
+        boolean valido = true;
+        String erro = "";
+
+        if (txtNome.getText().trim().length() == 0) {
+            erro = "O preenchimento do nome é obrigatório.\n";
+            valido = false;
+        }
+
+        if (txtDataNascimento.getText().replace("/", "").trim().length() == 0) {
+            erro += "O preenchimento da data de nascimento é obrigatório.\n";
+            valido = false;
+        }
+
+        if (FuncoesUteis.isCPF(txtCpf.getText()) == false) {
+            erro += "CPF inválido.\n";
+            valido = false;
+        }
+
+        if (txtRg.getText().trim().length() == 0) {
+            erro += "O preenchimento do número de RG é obrigatório.\n";
+            valido = false;
+        }
+
+        if (txtEmail.getText().trim().length() == 0) {
+            erro += "O preenchimento do email é obrigatório.\n";
+            valido = false;
+        }
+
+        String celular = txtCel.getText();
+        String telefone = txtTel.getText();
+
+        celular = celular.replace("(", "");
+        celular = celular.replace(")", "");
+        celular = celular.replace("-", "");
+        telefone = telefone.replace("(", "");
+        telefone = telefone.replace(")", "");
+        telefone = telefone.replace("-", "");
+
+        if (telefone.trim().length() == 0 && celular.trim().length() == 0) {
+            erro += "O preenchimento de ao menos um número de contato é obrigatório.\n";
+            valido = false;
+        } else {
+            if (telefone.trim().length() < 10) {
+                erro += "Número de telefone inválido.\n";
+                valido = false;
+            }
+            if (celular.trim().length() < 10) {
+                erro += "Número de celular inválido.\n";
+                valido = false;
+            }
+        }
+
+        if (txtCep.getText().replace("-", "").trim().length() == 0) {
+            erro += "Número de CEP inválido.\n";
+            valido = false;
+        }
+
+        if (txtCidade.getText().trim().length() == 0) {
+            erro += "O preenchimento do cidade é obrigatório.\n";
+            valido = false;
+        }
+
+        if (txtRua.getText().trim().length() == 0) {
+            erro += "O preenchimento do rua é obrigatório.\n";
+            valido = false;
+        }
+
+        if (txtNum.getText().trim().isEmpty()) {
+            erro += "O preenchimento do número de casa é obrigatório.\n";
+            valido = false;
+        }
+
+        if (txtBairro.getText().trim().length() == 0) {
+            erro += "O preenchimento do bairro é obrigatório.\n";
+            valido = false;
+        }
+
+        if (txtUf.getText().trim().length() == 0) {
+            erro += "O preenchimento da UF (Estado) é obrigatório.\n";
+            valido = false;
+        }
+
+        if (txtCrm.getText().trim().isEmpty()) {
+            erro += "O preenchimento do número de CRM é obrigatório.\n";
+            valido = false;
+        }
+
+        if (txtUfCrm.getText().trim().length() == 0) {
+            erro += "O preenchimento do UF do CRM é obrigatório.\n";
+            valido = false;
+        }
+
+        if (listaEspecialidades.getSelectedValuesList().isEmpty()) {
+            erro += "O preenchimento de especialidade do médico é obrigatório.\n";
+            valido = false;
+        }
+
+        JOptionPane.showMessageDialog(this, erro, "Dados de cadastro inválidos.", JOptionPane.ERROR_MESSAGE);
+        return valido;
+    }
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        if (validarCamposPreenchidos()) {
+            JOptionPane.showMessageDialog(this, "Cadastrado");
+        }
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnLimpar;
@@ -507,13 +627,13 @@ public class DlgCadMedico extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelNome;
+    private javax.swing.JList<String> listaEspecialidades;
     private javax.swing.JPanel painelDadosProfissionais2;
     private javax.swing.JPanel pnDados;
     private javax.swing.JPanel pnEndereco;
@@ -525,7 +645,7 @@ public class DlgCadMedico extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField txtCep;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JFormattedTextField txtCpf;
-    private javax.swing.JFormattedTextField txtCrm2;
+    private javax.swing.JFormattedTextField txtCrm;
     private javax.swing.JFormattedTextField txtDataNascimento;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNome;
@@ -534,6 +654,6 @@ public class DlgCadMedico extends javax.swing.JDialog {
     private javax.swing.JTextField txtRua;
     private javax.swing.JFormattedTextField txtTel;
     private javax.swing.JFormattedTextField txtUf;
-    private javax.swing.JTextField txtUfCRM2;
+    private javax.swing.JTextField txtUfCrm;
     // End of variables declaration//GEN-END:variables
 }
