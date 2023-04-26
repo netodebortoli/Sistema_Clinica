@@ -9,9 +9,7 @@ public abstract class Pessoa {
     private String nome;
     private Date dataNascimento;
     private String cpf;
-    private String rg;
     private char sexo;
-    private String email;
     private String telefone;
     private String celular;
     private String cep;
@@ -21,13 +19,11 @@ public abstract class Pessoa {
     private int numero;
     private String uf;
 
-    public Pessoa(String nome, Date dataNascimento, String cpf, String rg, char sexo, String email, String telefone, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
+    public Pessoa(String nome, Date dataNascimento, String cpf, char sexo, String telefone, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.cpf = cpf;
-        this.rg = rg;
         this.sexo = sexo;
-        this.email = email;
         this.telefone = telefone;
         this.celular = celular;
         this.cep = cep;
@@ -38,12 +34,12 @@ public abstract class Pessoa {
         this.uf = uf;
     }
 
-    public int getId_pessoa() {
+    public int getId() {
         return id;
     }
 
-    public void setId_pessoa(int id_pessoa) {
-        this.id = id_pessoa;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -70,28 +66,12 @@ public abstract class Pessoa {
         this.cpf = cpf;
     }
 
-    public String getRg() {
-        return rg;
-    }
-
-    public void setRg(String rg) {
-        this.rg = rg;
-    }
-
     public char getSexo() {
         return sexo;
     }
 
     public void setSexo(char sexo) {
         this.sexo = sexo;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getTelefone() {

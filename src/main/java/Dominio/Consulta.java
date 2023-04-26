@@ -8,15 +8,16 @@ import java.util.Date;
  */
 public class Consulta {
 
-    private int id_consulta;
+    private int idConsulta;
     private Date data;
     private String horario;
     private Medico medico;
     private Paciente paciente;
-    private Modalidade modalidade;
+    private Especialidade modalidade;
     private boolean concluida;
-    
-    public Consulta(Date data, String horario, Medico medico, Paciente paciente, Modalidade modalidade, boolean concluida) {
+
+    public Consulta(int idConsulta, Date data, String horario, Medico medico, Paciente paciente, Especialidade modalidade, boolean concluida) {
+        this.idConsulta = idConsulta;
         this.data = data;
         this.horario = horario;
         this.medico = medico;
@@ -25,12 +26,12 @@ public class Consulta {
         this.concluida = concluida;
     }
 
-    public int getId_consulta() {
-        return id_consulta;
+    public int getIdConsulta() {
+        return idConsulta;
     }
 
-    public void setId_consulta(int id_consulta) {
-        this.id_consulta = id_consulta;
+    public void setIdConsulta(int idConsulta) {
+        this.idConsulta = idConsulta;
     }
 
     public Date getData() {
@@ -65,11 +66,11 @@ public class Consulta {
         this.paciente = paciente;
     }
 
-    public Modalidade getModalidade() {
+    public Especialidade getModalidade() {
         return modalidade;
     }
 
-    public void setModalidade(Modalidade modalidade) {
+    public void setModalidade(Especialidade modalidade) {
         this.modalidade = modalidade;
     }
 

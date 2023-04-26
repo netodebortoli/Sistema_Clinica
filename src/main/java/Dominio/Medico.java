@@ -9,13 +9,13 @@ import java.util.Date;
 public class Medico extends Pessoa {
 
     private int crm;
-    private String uf_crm;
-    private Modalidade especialidades[];
+    private String crmUf;
+    private Especialidade especialidades[];
 
-    public Medico(int crm, String uf_crm, Modalidade[] especialidades, String nome, Date dataNascimento, String cpf, String rg, char sexo, String email, String telefone, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
-        super(nome, dataNascimento, cpf, rg, sexo, email, telefone, celular, cep, cidade, bairro, rua, numero, uf);
+    public Medico(int crm, String crmUf, Especialidade[] especialidades, String nome, Date dataNascimento, String cpf, char sexo, String telefone, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
+        super(nome, dataNascimento, cpf, sexo, telefone, celular, cep, cidade, bairro, rua, numero, uf);
         this.crm = crm;
-        this.uf_crm = uf_crm;
+        this.crmUf = crmUf;
         this.especialidades = especialidades;
     }
 
@@ -27,19 +27,19 @@ public class Medico extends Pessoa {
         this.crm = crm;
     }
 
-    public String getUf_crm() {
-        return uf_crm;
+    public String getCrmUf() {
+        return crmUf;
     }
 
-    public void setUf_crm(String uf_crm) {
-        this.uf_crm = uf_crm;
+    public void setCrmUf(String crmUf) {
+        this.crmUf = crmUf;
     }
 
-    public Modalidade[] getEspecialidades() {
+    public Especialidade[] getEspecialidades() {
         return especialidades;
     }
 
-    public void setEspecialidades(Modalidade[] especialidades) {
+    public void setEspecialidades(Especialidade[] especialidades) {
         this.especialidades = especialidades;
     }
 }

@@ -9,10 +9,20 @@ import java.util.Date;
 public class Paciente extends Pessoa {
 
     private String observacao;
+    private String tipoSanguineo;
 
-    public Paciente(String observacao, String nome, Date dataNascimento, String cpf, String rg, char sexo, String email, String telefone, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
-        super(nome, dataNascimento, cpf, rg, sexo, email, telefone, celular, cep, cidade, bairro, rua, numero, uf);
+    public Paciente(String observacao, String tipoSanguineo, String nome, Date dataNascimento, String cpf, char sexo, String telefone, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
+        super(nome, dataNascimento, cpf, sexo, telefone, celular, cep, cidade, bairro, rua, numero, uf);
         this.observacao = observacao;
+        this.tipoSanguineo = tipoSanguineo;
+    }
+
+    public String getTipoSanguineo() {
+        return tipoSanguineo;
+    }
+
+    public void setTipoSanguineo(String tipoSanguineo) {
+        this.tipoSanguineo = tipoSanguineo;
     }
 
     public String getObservacao() {
