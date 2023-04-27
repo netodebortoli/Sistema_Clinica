@@ -1,6 +1,5 @@
 Janelas\DlgAgendarConsulta$1.class
 Controle\GerenciadorInterface.class
-Controle\BuscaCEP.class
 Janelas\DlgCadPaciente.class
 Janelas\DlgListarConsulta$2.class
 Controle\FuncoesUteis.class
@@ -8,14 +7,14 @@ Dominio\Paciente.class
 Dominio\Medico.class
 Janelas\DlgAgendarConsulta.class
 Janelas\FrmPrincipal$3.class
-Dominio\Endereco.class
 Janelas\DlgAgendarConsulta$3.class
 Janelas\DlgCadMedico$1.class
 Janelas\FrmPrincipal.class
 Janelas\DlgCadMedico$2.class
 Janelas\FrmPrincipal$4.class
-Janelas\DlgCadPaciente$3.class
 Janelas\DlgBuscarPessoa.class
+Dominio\Especialidade.class
+Dao\ConexaoHibernate.class
 Janelas\FrmPrincipal$1.class
 Janelas\DlgListarConsulta.class
 Janelas\DlgAgendarConsulta$2.class
@@ -27,6 +26,5 @@ Dominio\Pessoa.class
 Dominio\Consulta.class
 Janelas\FrmPrincipal$5.class
 Janelas\DlgCadPaciente$2.class
-Dominio\Modalidade.class
 Controle\GerenciadorDominio.class
 Janelas\DlgCadMedico$3.class

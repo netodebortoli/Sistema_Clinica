@@ -217,6 +217,8 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarConsultasActionPerformed
+
+        // VALIDAR CAMPO DE DATA!
         
     }//GEN-LAST:event_btnBuscarConsultasActionPerformed
 

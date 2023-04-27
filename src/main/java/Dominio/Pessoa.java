@@ -2,21 +2,49 @@
 package Dominio;
 
 import java.util.Date;
+import javax.persistence.*;
 
+@Entity
 public abstract class Pessoa {
     
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column (length = 250, nullable = false)
     private String nome;
+    
+    @Temporal (TemporalType.DATE)
+    @Column (nullable = false)
     private Date dataNascimento;
+    
+    @Column (length = 14, nullable = false,  unique = true, updatable = false)
     private String cpf;
+    
+    @Column (nullable = false)
     private char sexo;
+    
+    @Column (length = 13)
     private String telefone;
+    
+    @Column (length = 14)
     private String celular;
+    
+    @Column (length = 9, nullable = false)
     private String cep;
+    
+    @Column (nullable = false, length = 50)
     private String cidade;
+    
+    @Column (nullable = false, length = 50)
     private String bairro;
+
+    @Column (nullable = false, length = 60)
     private String rua;
+    
     private int numero;
+    
+    @Column (length = 50)
     private String uf;
 
     public Pessoa(String nome, Date dataNascimento, String cpf, char sexo, String telefone, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {

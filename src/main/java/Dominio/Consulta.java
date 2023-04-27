@@ -1,29 +1,40 @@
 package Dominio;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.*;
 
 /**
  *
  * @author Admin
  */
-public class Consulta {
+@Entity
+public class Consulta implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idConsulta;
-    private Date data;
-    private String horario;
-    private Medico medico;
-    private Paciente paciente;
-    private Especialidade modalidade;
-    private boolean concluida;
 
-    public Consulta(int idConsulta, Date data, String horario, Medico medico, Paciente paciente, Especialidade modalidade, boolean concluida) {
+    @Temporal(TemporalType.DATE)
+    private Date data;
+
+    @Column(length = 3, nullable = false)
+    private String horario;
+
+    private Medico medico;
+
+    private Paciente paciente;
+
+    private Especialidade modalidade;
+
+    public Consulta(int idConsulta, Date data, String horario, Medico medico, Paciente paciente, Especialidade modalidade) {
         this.idConsulta = idConsulta;
         this.data = data;
         this.horario = horario;
         this.medico = medico;
         this.paciente = paciente;
         this.modalidade = modalidade;
-        this.concluida = concluida;
+
     }
 
     public int getIdConsulta() {
@@ -74,11 +85,4 @@ public class Consulta {
         this.modalidade = modalidade;
     }
 
-    public boolean isConcluida() {
-        return concluida;
-    }
-
-    public void setConcluida(boolean concluida) {
-        this.concluida = concluida;
-    }
 }
