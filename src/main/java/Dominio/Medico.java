@@ -1,18 +1,25 @@
 package Dominio;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-/**
- *
- * @author Admin
- */
 public class Medico extends Pessoa {
 
+    //@Column (nullable = false, length = 10, unique = true)
     private int crm;
-    private String crmUf;
-    private Especialidade especialidades[];
 
-    public Medico(int crm, String crmUf, Especialidade[] especialidades, String nome, Date dataNascimento, String cpf, char sexo, String telefone, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
+    //@Column (nullable = false, length = 30)
+    private String crmUf;
+
+    // Relacionamento N...N
+    private List<Especialidade> especialidades = new ArrayList();
+
+    //@OneToMany (mappedBy = "medico" , fetch = FetchType.LAZY)
+    //@Column (insertable = null, nullable = true)
+    private List<Consulta> consultas = new ArrayList();
+
+    public Medico(int crm, String crmUf, List<Especialidade> especialidades, String nome, Date dataNascimento, String cpf, char sexo, String telefone, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
         super(nome, dataNascimento, cpf, sexo, telefone, celular, cep, cidade, bairro, rua, numero, uf);
         this.crm = crm;
         this.crmUf = crmUf;
@@ -35,11 +42,12 @@ public class Medico extends Pessoa {
         this.crmUf = crmUf;
     }
 
-    public Especialidade[] getEspecialidades() {
+    public List<Especialidade> getEspecialidades() {
         return especialidades;
     }
 
-    public void setEspecialidades(Especialidade[] especialidades) {
+    public void setEspecialidades(List<Especialidade> especialidades) {
         this.especialidades = especialidades;
     }
+
 }

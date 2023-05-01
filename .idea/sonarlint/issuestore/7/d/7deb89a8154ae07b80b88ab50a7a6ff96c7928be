@@ -1,0 +1,42 @@
+
+C
+java:S1604#"(Make this anonymous inner class a lambda(¸·Î˜úÿÿÿÿ
+C
+java:S1604+"(Make this anonymous inner class a lambda(éŸ»ııÿÿÿÿ
+C
+java:S16047"(Make this anonymous inner class a lambda(¿±Ó°üÿÿÿÿ
+>
+java:S1604?"(Make this anonymous inner class a lambda(ÁÖÇË
+>
+java:S1604K"(Make this anonymous inner class a lambda(““³ç
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ù¼—ô
+s
+java:S1450y"XRemove the "jMenuBar1" field and declare it as a local variable in the relevant methods.(úıÁ›ÿÿÿÿÿ
+r
+java:S1450z"WRemove the "mnuBusca" field and declare it as a local variable in the relevant methods.(óò¿òûÿÿÿÿ
+z
+java:S1450{"_Remove the "mnuBuscarPessoas" field and declare it as a local variable in the relevant methods.(·²¡Öıÿÿÿÿ
+j
+java:S1450|"URemove the "mnuCad" field and declare it as a local variable in the relevant methods.(Ä«F
+s
+java:S1450}"XRemove the "mnuCadMed" field and declare it as a local variable in the relevant methods.(à‰ô¶ùÿÿÿÿ
+x
+java:S1450~"]Remove the "mnuCadPaciente" field and declare it as a local variable in the relevant methods.(¹ş¡¾ùÿÿÿÿ
+p
+java:S1450"ZRemove the "mnuConsulta" field and declare it as a local variable in the relevant methods.(ĞŞáË
+w
+java:S1450€"aRemove the "mnuConsultaAgendar" field and declare it as a local variable in the relevant methods.(˜ÿ!
+|
+java:S1450"`Remove the "mnuConsultaListar" field and declare it as a local variable in the relevant methods.(‹û«ïşÿÿÿÿ
+P
+java:S1948"5Make "gerInterfaceGrafica" transient or serializable.(õ‹Íäøÿÿÿÿ
+E
+java:S1172d"*Remove this unused method parameter "evt".(áß¤Ùúÿÿÿÿ
+E
+java:S1172h"*Remove this unused method parameter "evt".(ÛèŞæûÿÿÿÿ
+?
+java:S1172l"*Remove this unused method parameter "evt".(Ì­·/
+E
+java:S1172p"*Remove this unused method parameter "evt".(ì§ß—şÿÿÿÿ
+@
+java:S1172t"*Remove this unused method parameter "evt".(âˆ´æ

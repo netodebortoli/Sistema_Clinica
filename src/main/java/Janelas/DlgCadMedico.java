@@ -27,6 +27,7 @@ public class DlgCadMedico extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGrupoSexo = new javax.swing.ButtonGroup();
         pnEndereco = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         txtRua = new javax.swing.JTextField();
@@ -296,9 +297,11 @@ public class DlgCadMedico extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sexo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 2, 12))); // NOI18N
 
+        btnGrupoSexo.add(radioMasc);
         radioMasc.setMnemonic('M');
         radioMasc.setText("Masculino");
 
+        btnGrupoSexo.add(radioFem);
         radioFem.setMnemonic('F');
         radioFem.setSelected(true);
         radioFem.setText("Feminino");
@@ -437,8 +440,25 @@ public class DlgCadMedico extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void limparCampos() {
+        txtNome.setText("");
+        txtDataNascimento.setText("");
+        txtCpf.setText("");
+        txtCel.setText("");
+        txtTel.setText("");
+        txtCep.setText("");
+        txtCidade.setText("");
+        txtRua.setText("");
+        txtNum.setText("");
+        txtBairro.setText("");
+        txtUf.setText("");
+        txtCrm.setText("");
+        txtUfCrm.setText("");
+        listaEspecialidades.clearSelection();
+    }
+
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        // TODO add your handling code here:
+        limparCampos();
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private boolean validarCamposPreenchidos() {
@@ -500,9 +520,13 @@ public class DlgCadMedico extends javax.swing.JDialog {
             valido = false;
         }
 
-        if (txtNum.getText().trim().isEmpty()) {
-            erro += "O preenchimento do número de casa é obrigatório.\n";
-            valido = false;
+        if (txtNum.getText().trim().length() > 0) {
+            int numResidencia = Integer.parseInt(txtNum.getText());
+
+            if (numResidencia < 0) {
+                erro += "O número de residência precisa ser maior que zero.\n";
+                valido = false;
+            }
         }
 
         if (txtBairro.getText().trim().length() == 0) {
@@ -538,10 +562,12 @@ public class DlgCadMedico extends javax.swing.JDialog {
         if (validarCamposPreenchidos()) {
             JOptionPane.showMessageDialog(this, "Cadastrado");
         }
+
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.ButtonGroup btnGrupoSexo;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

@@ -1,0 +1,34 @@
+
+_
+java:S11920"IDefine a constant instead of duplicating this literal "Segoe UI" 6 times.(Õ ¦û
+>
+java:S16042"(Make this anonymous inner class a lambda(î¸­İ
+C
+java:S1604_"(Make this anonymous inner class a lambda(åğ…”úÿÿÿÿ
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ù¼—ô
+w
+java:S1450®"[Remove the "btnCadastrar" field and declare it as a local variable in the relevant methods.(Ÿè¸Ãıÿÿÿÿ
+p
+java:S1450¯"YRemove the "btnExcluir" field and declare it as a local variable in the relevant methods.(˜÷Ò
+r
+java:S1450°"[Remove the "btnPesquisar" field and declare it as a local variable in the relevant methods.(ÈÃ˜ß
+r
+java:S1450²"VRemove the "jLabel1" field and declare it as a local variable in the relevant methods.(°ãÉ¸ÿÿÿÿÿ
+w
+java:S1450³"[Remove the "jScrollPane1" field and declare it as a local variable in the relevant methods.(¤á×ÿÿÿÿÿ
+o
+java:S1450´"XRemove the "pnlTabela" field and declare it as a local variable in the relevant methods.(•É»¹
+v
+java:S1450µ"ZRemove the "tblConsulta" field and declare it as a local variable in the relevant methods.(ó÷–øÿÿÿÿ
+B
+java:S1948"'Make "gerIG" transient or serializable.(˜ğ¶üûÿÿÿÿ
+@
+java:S1172˜"*Remove this unused method parameter "evt".(«‚Òi
+N
+java:S1135™"2Complete the task associated to this TODO comment.(ÜÀ†áûÿÿÿÿ
+F
+java:S1172œ"*Remove this unused method parameter "evt".(ª÷ ßÿÿÿÿÿ
+J
+java:S1128"4Remove this unused import 'java.util.logging.Level'.(…µÛ¶
+K
+java:S1128"5Remove this unused import 'java.util.logging.Logger'.(ƒ¥óš

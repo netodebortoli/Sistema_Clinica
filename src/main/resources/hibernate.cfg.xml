@@ -12,5 +12,8 @@
     <property name="hibernate.hbm2ddl.auto">create</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.format_sql">true</property>
+    <mapping class="Dominio.Pessoa"/>
+    <mapping class="Dominio.Especialidade"/>
+    <mapping class="Dominio.Consulta"/>
   </session-factory>
 </hibernate-configuration>

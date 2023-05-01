@@ -406,12 +406,28 @@ public class DlgCadPaciente extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+    private void limparCampos() {
+        txtNome.setText("");
+        txtDataNascimento.setText("");
+        txtCpf.setText("");
+        txtCel.setText("");
+        txtTel.setText("");
+        txtCep.setText("");
+        txtCidade.setText("");
+        txtRua.setText("");
+        txtNum.setText("");
+        txtBairro.setText("");
+        txtUf.setText("");
+        cbTipoSangue.setSelectedIndex(0);
+        txtAreaObs.setText("");
+    }
 
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        limparCampos();
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private boolean validarCamposPreenchidos() {
-        
+
         boolean valido = true;
         String erro = "";
 
@@ -424,7 +440,7 @@ public class DlgCadPaciente extends javax.swing.JDialog {
             erro += "O preenchimento da data de nascimento é obrigatório.\n";
             valido = false;
         }
-    
+
         if (FuncoesUteis.isCPF(txtCpf.getText()) == false) {
             erro += "CPF inválido.\n";
             valido = false;
@@ -469,9 +485,13 @@ public class DlgCadPaciente extends javax.swing.JDialog {
             valido = false;
         }
 
-        if (txtNum.getText().trim().isEmpty()) {
-            erro += "O preenchimento do número de casa é obrigatório.\n";
-            valido = false;
+        if (txtNum.getText().trim().length() > 0) {
+            int numResidencia = Integer.parseInt(txtNum.getText());
+
+            if (numResidencia < 0) {
+                erro += "O número de residência precisa ser maior que zero.\n";
+                valido = false;
+            }
         }
 
         if (txtBairro.getText().trim().length() == 0) {

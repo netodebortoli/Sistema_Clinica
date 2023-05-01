@@ -1,27 +1,29 @@
 
 package Dominio;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
 @Entity
-public abstract class Pessoa {
+public abstract class Pessoa implements Serializable {
     
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column (name = "id_pessoa")
     private int id;
     
-    @Column (length = 250, nullable = false)
+    @Column (length = 250, nullable = false, name = "nome_pessoa")
     private String nome;
     
     @Temporal (TemporalType.DATE)
-    @Column (nullable = false)
+    @Column (nullable = false, updatable = false, name = "data_nascimento")
     private Date dataNascimento;
     
     @Column (length = 14, nullable = false,  unique = true, updatable = false)
     private String cpf;
     
-    @Column (nullable = false)
+    @Column (nullable = false, length = 1)
     private char sexo;
     
     @Column (length = 13)
@@ -32,19 +34,20 @@ public abstract class Pessoa {
     
     @Column (length = 9, nullable = false)
     private String cep;
-    
+     
     @Column (nullable = false, length = 50)
     private String cidade;
     
     @Column (nullable = false, length = 50)
     private String bairro;
 
-    @Column (nullable = false, length = 60)
+    @Column (nullable = false)
     private String rua;
     
+    @Column (nullable = true)
     private int numero;
     
-    @Column (length = 50)
+    @Column (length = 50, nullable = false)
     private String uf;
 
     public Pessoa(String nome, Date dataNascimento, String cpf, char sexo, String telefone, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {

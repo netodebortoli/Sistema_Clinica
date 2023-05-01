@@ -1,20 +1,41 @@
 package Dominio;
 
-public class Especialidade {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.*;
 
-    private String idEspecialidade;
+@Entity
+public class Especialidade implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_especialidade")
+    private int idEspecialidade;
+
+    @Column(length = 30, nullable = false)
     private String descricao;
 
-    public Especialidade(String idEspecialidade, String descricao) {
+    // Relacionamento N...N
+    // Será que é transiente?
+    @Transient
+    private Medico medicos[];
+
+    // Será que é transiente?
+    @OneToMany(mappedBy = "especialidade", fetch = FetchType.LAZY)
+    @Column(insertable = false, nullable = true)
+    private List<Consulta> consultas = new ArrayList();
+
+    public Especialidade(int idEspecialidade, String descricao) {
         this.idEspecialidade = idEspecialidade;
         this.descricao = descricao;
     }
 
-    public String getIdEspecialidade() {
+    public int getIdEspecialidade() {
         return idEspecialidade;
     }
 
-    public void setIdEspecialidade(String idEspecialidade) {
+    public void setIdEspecialidade(int idEspecialidade) {
         this.idEspecialidade = idEspecialidade;
     }
 

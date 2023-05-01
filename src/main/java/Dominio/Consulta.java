@@ -4,37 +4,42 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
-/**
- *
- * @author Admin
- */
 @Entity
 public class Consulta implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_consulta")
     private int idConsulta;
 
     @Temporal(TemporalType.DATE)
-    private Date data;
+    @Column(name = "data_consulta", nullable = false)
+    private Date dataConsulta;
 
     @Column(length = 3, nullable = false)
     private String horario;
 
+//    @ManyToOne (fetch = FetchType.EAGER)
+//    @JoinColumn(name = "id_medico")
+    @Transient
     private Medico medico;
 
+//    @ManyToOne (fetch = FetchType.EAGER)
+//    @JoinColumn(name = "id_paciente")
+    @Transient
     private Paciente paciente;
 
-    private Especialidade modalidade;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_especialidade")
+    private Especialidade especialidade;
 
-    public Consulta(int idConsulta, Date data, String horario, Medico medico, Paciente paciente, Especialidade modalidade) {
+    public Consulta(int idConsulta, Date dataConsulta, String horario, Medico medico, Paciente paciente, Especialidade especialidade) {
         this.idConsulta = idConsulta;
-        this.data = data;
+        this.dataConsulta = dataConsulta;
         this.horario = horario;
         this.medico = medico;
         this.paciente = paciente;
-        this.modalidade = modalidade;
-
+        this.especialidade = especialidade;
     }
 
     public int getIdConsulta() {
@@ -45,12 +50,12 @@ public class Consulta implements Serializable {
         this.idConsulta = idConsulta;
     }
 
-    public Date getData() {
-        return data;
+    public Date getDataConsulta() {
+        return dataConsulta;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setDataConsulta(Date dataConsulta) {
+        this.dataConsulta = dataConsulta;
     }
 
     public String getHorario() {
@@ -77,12 +82,12 @@ public class Consulta implements Serializable {
         this.paciente = paciente;
     }
 
-    public Especialidade getModalidade() {
-        return modalidade;
+    public Especialidade getEspecialidade() {
+        return especialidade;
     }
 
-    public void setModalidade(Especialidade modalidade) {
-        this.modalidade = modalidade;
+    public void setEspecialidade(Especialidade especialidade) {
+        this.especialidade = especialidade;
     }
 
 }
