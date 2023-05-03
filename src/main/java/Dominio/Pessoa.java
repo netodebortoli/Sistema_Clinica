@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
-@Entity
 public abstract class Pessoa implements Serializable {
     
     @Id

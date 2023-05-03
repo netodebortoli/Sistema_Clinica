@@ -16,12 +16,14 @@ public class Especialidade implements Serializable {
     @Column(length = 30, nullable = false)
     private String descricao;
 
-    // Relacionamento N...N
-    // Será que é transiente?
-    @Transient
-    private Medico medicos[];
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "medico_especialidade",
+            joinColumns = {
+                @JoinColumn(name = "id_especialidade")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "id_medico")})
+    private List<Medico> medicos = new ArrayList();
 
-    // Será que é transiente?
     @OneToMany(mappedBy = "especialidade", fetch = FetchType.LAZY)
     @Column(insertable = false, nullable = true)
     private List<Consulta> consultas = new ArrayList();

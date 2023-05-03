@@ -19,14 +19,12 @@ public class Consulta implements Serializable {
     @Column(length = 3, nullable = false)
     private String horario;
 
-//    @ManyToOne (fetch = FetchType.EAGER)
-//    @JoinColumn(name = "id_medico")
-    @Transient
+    @ManyToOne (fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_medico")
     private Medico medico;
 
-//    @ManyToOne (fetch = FetchType.EAGER)
-//    @JoinColumn(name = "id_paciente")
-    @Transient
+    @ManyToOne (fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_paciente")
     private Paciente paciente;
 
     @ManyToOne(fetch = FetchType.EAGER)
