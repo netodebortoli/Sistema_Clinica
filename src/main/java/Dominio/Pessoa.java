@@ -5,14 +5,16 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
+@Entity
+@Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Pessoa implements Serializable {
     
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.AUTO)
     @Column (name = "id_pessoa")
     private int id;
     
-    @Column (length = 250, nullable = false, name = "nome_pessoa")
+    @Column (length = 100, nullable = false, name = "nome_pessoa")
     private String nome;
     
     @Temporal (TemporalType.DATE)

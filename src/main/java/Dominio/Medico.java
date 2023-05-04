@@ -8,18 +8,10 @@ import javax.persistence.*;
 @Entity
 public class Medico extends Pessoa {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_pessoa")
-    private int id;
-
-    @Column(length = 250, nullable = false, name = "nome_pessoa")
-    private String nome;
-
-    @Column (nullable = false, length = 10, unique = true)
+    @Column(nullable = false, length = 10, unique = true)
     private int crm;
 
-    @Column (nullable = false, length = 30)
+    @Column(nullable = false, length = 30, name = "crm_uf")
     private String crmUf;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -30,7 +22,7 @@ public class Medico extends Pessoa {
                 @JoinColumn(name = "id_especialidade")})
     private List<Especialidade> especialidades = new ArrayList();
 
-    @OneToMany (mappedBy = "medico" , fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "medico", fetch = FetchType.LAZY)
     private List<Consulta> consultas = new ArrayList();
 
     public Medico(int crm, String crmUf, List<Especialidade> especialidades, String nome, Date dataNascimento, String cpf, char sexo, String telefone, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
