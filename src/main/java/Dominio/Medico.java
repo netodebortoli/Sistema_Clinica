@@ -31,6 +31,8 @@ public class Medico extends Pessoa {
         this.crmUf = crmUf;
         this.especialidades = especialidades;
     }
+    
+    public Medico() {}
 
     public int getCrm() {
         return crm;

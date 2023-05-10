@@ -22,6 +22,8 @@ public class Paciente extends Pessoa {
         this.tipoSanguineo = tipoSanguineo;
     }
 
+    public Paciente() {}
+    
     public String getTipoSanguineo() {
         return tipoSanguineo;
     }

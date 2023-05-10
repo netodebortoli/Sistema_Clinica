@@ -65,6 +65,8 @@ public abstract class Pessoa implements Serializable {
         this.numero = numero;
         this.uf = uf;
     }
+    
+    public Pessoa() {}
 
     public int getId() {
         return id;

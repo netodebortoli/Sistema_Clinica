@@ -39,6 +39,8 @@ public class Consulta implements Serializable {
         this.paciente = paciente;
         this.especialidade = especialidade;
     }
+    
+    public Consulta() {}
 
     public int getIdConsulta() {
         return idConsulta;
