@@ -31,13 +31,14 @@ public class Consulta implements Serializable {
     @JoinColumn(name = "id_especialidade")
     private Especialidade especialidade;
 
-    public Consulta(int idConsulta, Date dataConsulta, String horario, Medico medico, Paciente paciente, Especialidade especialidade) {
+    public Consulta(Date dataConsulta, String horario, Medico medico, Paciente paciente, Especialidade especialidade) {
         this.idConsulta = idConsulta;
         this.dataConsulta = dataConsulta;
         this.horario = horario;
         this.medico = medico;
         this.paciente = paciente;
         this.especialidade = especialidade;
+
     }
     
     public Consulta() {}

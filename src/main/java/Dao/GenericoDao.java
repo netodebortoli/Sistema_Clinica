@@ -1,12 +1,16 @@
 package Dao;
 
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 public class GenericoDao {
 
-    public void create(Object obj) {
+    public GenericoDao() {
+    }
+
+    public void create(Object obj) throws HibernateException {
 
         Session session = null;
 
@@ -26,10 +30,9 @@ public class GenericoDao {
                 session.close();
             }
         }
-
     }
 
-    public void delete(Object obj) {
+    public void delete(Object obj) throws HibernateException {
 
         Session session = null;
 
@@ -51,7 +54,7 @@ public class GenericoDao {
         }
     }
 
-    public List read(Object obj) {
+    public List read(Class classe) throws HibernateException {
 
         Session session = null;
         List list = null;
@@ -61,8 +64,34 @@ public class GenericoDao {
             session.beginTransaction();
 
             // LENDO OS DADOS DO BANCO DE DADOS
-            
-            
+            Criteria consulta = session.createCriteria(classe);
+            list = consulta.list();
+
+            session.getTransaction().commit();
+            session.close();
+
+        } catch (HibernateException erro) {
+            if (session != null) {
+                session.getTransaction().rollback();
+                session.close();
+            }
+            throw new HibernateException(erro);
+        }
+
+        return list;
+
+    }
+
+    public void update(Object obj) throws HibernateException {
+        Session session = null;
+
+        try {
+            session = ConexaoHibernate.getSessionFactory().openSession();
+            session.beginTransaction();
+
+            // ALTERANDO OS DADOS DE UM OBJETO DO BANCO DE DADOS
+            session.update(obj);
+
             session.getTransaction().commit();
             session.close();
 
@@ -72,12 +101,5 @@ public class GenericoDao {
                 session.close();
             }
         }
-
-        return null;
-
-    }
-
-    public void update(Object obj) {
-
     }
 }
