@@ -23,32 +23,24 @@ public class GerenciadorDominio {
         consultaDao = new ConsultaDao();
     }
 
-    public void criarMedico(int crm, String crmUf, List<Especialidade> especialidades, String nome, Date dataNascimento, String cpf, char sexo,
-            String telefone, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
-        Medico med = new Medico(crm, crmUf, especialidades, nome, dataNascimento, cpf, sexo, telefone, celular, cep, cidade, bairro, rua, numero, uf);
-        genericoDao.create(med);
+    public void cadastrarMedico(int crm, String crmUf, List<Especialidade> especialidades, String nome, Date dataNascimento, String cpf, String sexo,
+            String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
+        Medico med = new Medico(crm, crmUf, especialidades, nome, dataNascimento, cpf, sexo, celular, cep, cidade, bairro, rua, numero, uf);
+        genericoDao.cadastrar(med);
     }
 
-    public void criarPaciente(String observacao, String tipoSanguineo, String nome, Date dataNascimento, String cpf, char sexo,
-            String telefone, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
-        Paciente paciente = new Paciente(observacao, tipoSanguineo, nome, dataNascimento, cpf, sexo, telefone, celular, cep, cidade, bairro, rua, numero, uf);
-        genericoDao.create(paciente);
+    public void cadastrarPaciente(String observacao, String tipoSanguineo, String nome, Date dataNascimento, String cpf, String sexo,
+            String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
+        Paciente paciente = new Paciente(observacao, tipoSanguineo, nome, dataNascimento, cpf, sexo, celular, cep, cidade, bairro, rua, numero, uf);
+        genericoDao.cadastrar(paciente);
     }
 
-    public void criarConsulta(int idConsulta, Date dataConsulta, String horario, Medico medico, Paciente paciente, Especialidade especialidade) {
+    public void cadastrarConsulta(Date dataConsulta, String horario, Medico medico, Paciente paciente, Especialidade especialidade) {
         Consulta consulta = new Consulta(dataConsulta, horario, medico, paciente, especialidade);
-        genericoDao.create(consulta);
+        genericoDao.cadastrar(consulta);
     }
 
-    public List<Medico> listarMedicos() {
-        return genericoDao.read(Medico.class);
-    }
-
-    public List<Paciente> listarPacientes() {
-        return genericoDao.read(Paciente.class);
-    }
-
-    public List<Medico> listarConsulta() {
-        return genericoDao.read(Consulta.class);
+    public List listar(Class classe) {
+        return genericoDao.listar(classe);
     }
 }

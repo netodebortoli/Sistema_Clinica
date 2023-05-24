@@ -7,17 +7,20 @@ import javax.persistence.*;
 
 @Entity
 public class Paciente extends Pessoa {
-
+    
     private String observacao;
 
     @Column (length = 2, nullable = false, name = "tipo_sanguineo")
     private String tipoSanguineo;
 
-    @OneToMany (mappedBy = "paciente" , fetch = FetchType.LAZY)
+    @OneToMany (mappedBy = "paciente", 
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private List<Consulta> consultas = new ArrayList();
 
-    public Paciente(String observacao, String tipoSanguineo, String nome, Date dataNascimento, String cpf, char sexo, String telefone, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
-        super(nome, dataNascimento, cpf, sexo, telefone, celular, cep, cidade, bairro, rua, numero, uf);
+    public Paciente(String observacao, String tipoSanguineo, String nome, Date dataNascimento, String cpf, String sexo, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
+        super(nome, dataNascimento, cpf, sexo , celular, cep, cidade, bairro, rua, numero, uf);
         this.observacao = observacao;
         this.tipoSanguineo = tipoSanguineo;
     }

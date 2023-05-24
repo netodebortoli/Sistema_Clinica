@@ -8,7 +8,8 @@ import javax.persistence.*;
 @Entity
 public class Medico extends Pessoa {
 
-    @Column(nullable = false, length = 10, unique = true)
+//    @Column(nullable = false, length = 10, unique = true)
+    @Column(nullable = false, length = 10)
     private int crm;
 
     @Column(nullable = false, length = 30, name = "crm_uf")
@@ -22,17 +23,21 @@ public class Medico extends Pessoa {
                 @JoinColumn(name = "id_especialidade")})
     private List<Especialidade> especialidades = new ArrayList();
 
-    @OneToMany(mappedBy = "medico", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "medico",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private List<Consulta> consultas = new ArrayList();
 
-    public Medico(int crm, String crmUf, List<Especialidade> especialidades, String nome, Date dataNascimento, String cpf, char sexo, String telefone, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
-        super(nome, dataNascimento, cpf, sexo, telefone, celular, cep, cidade, bairro, rua, numero, uf);
+    public Medico(int crm, String crmUf, List<Especialidade> especialidades, String nome, Date dataNascimento, String cpf, String sexo, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
+        super(nome, dataNascimento, cpf, sexo, celular, cep, cidade, bairro, rua, numero, uf);
         this.crm = crm;
         this.crmUf = crmUf;
         this.especialidades = especialidades;
     }
-    
-    public Medico() {}
+
+    public Medico() {
+    }
 
     public int getCrm() {
         return crm;

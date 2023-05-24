@@ -21,16 +21,14 @@ public abstract class Pessoa implements Serializable {
     @Column (nullable = false, updatable = false, name = "data_nascimento")
     private Date dataNascimento;
     
-    @Column (length = 14, nullable = false,  unique = true, updatable = false)
+//    @Column (length = 11, nullable = false, updatable = false, unique = true)
+    @Column (length = 11, nullable = false, updatable = false)
     private String cpf;
     
     @Column (nullable = false, length = 1)
-    private char sexo;
-    
-    @Column (length = 13)
-    private String telefone;
-    
-    @Column (length = 14)
+    private String sexo;
+
+    @Column (length = 11)
     private String celular;
     
     @Column (length = 9, nullable = false)
@@ -51,12 +49,11 @@ public abstract class Pessoa implements Serializable {
     @Column (length = 50, nullable = false)
     private String uf;
 
-    public Pessoa(String nome, Date dataNascimento, String cpf, char sexo, String telefone, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
+    public Pessoa(String nome, Date dataNascimento, String cpf, String sexo, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.cpf = cpf;
         this.sexo = sexo;
-        this.telefone = telefone;
         this.celular = celular;
         this.cep = cep;
         this.cidade = cidade;
@@ -70,10 +67,6 @@ public abstract class Pessoa implements Serializable {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -100,20 +93,12 @@ public abstract class Pessoa implements Serializable {
         this.cpf = cpf;
     }
 
-    public char getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(char sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
     }
 
     public String getCelular() {
@@ -170,5 +155,10 @@ public abstract class Pessoa implements Serializable {
 
     public void setUf(String uf) {
         this.uf = uf;
+    }
+
+    @Override
+    public String toString() {
+        return nome ;
     }
 }

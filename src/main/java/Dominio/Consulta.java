@@ -32,7 +32,6 @@ public class Consulta implements Serializable {
     private Especialidade especialidade;
 
     public Consulta(Date dataConsulta, String horario, Medico medico, Paciente paciente, Especialidade especialidade) {
-        this.idConsulta = idConsulta;
         this.dataConsulta = dataConsulta;
         this.horario = horario;
         this.medico = medico;
@@ -45,10 +44,6 @@ public class Consulta implements Serializable {
 
     public int getIdConsulta() {
         return idConsulta;
-    }
-
-    public void setIdConsulta(int idConsulta) {
-        this.idConsulta = idConsulta;
     }
 
     public Date getDataConsulta() {

@@ -2,9 +2,7 @@ package Dao;
 
 import Dominio.Consulta;
 import java.util.List;
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
 
 public class ConsultaDao extends GenericoDao {
 

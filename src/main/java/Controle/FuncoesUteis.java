@@ -18,6 +18,12 @@ public class FuncoesUteis {
         dtForm.setLenient(false);
         return dtForm.format(dt);
     }
+    
+    public static boolean validarAnoNascimento(String dataNascimento) throws ParseException {
+        int anoNasc = strToDate(dataNascimento).getYear();
+        int anoAtual = new Date().getYear();
+        return anoNasc > anoAtual;
+    }
 
     public static boolean isCPF(String parCpf) {
 

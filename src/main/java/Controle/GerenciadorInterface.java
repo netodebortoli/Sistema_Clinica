@@ -3,8 +3,12 @@ package Controle;
 import Janelas.*;
 import java.awt.Frame;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import org.hibernate.HibernateException;
 
 public class GerenciadorInterface {
 
@@ -15,7 +19,7 @@ public class GerenciadorInterface {
     private DlgBuscarPessoa dlgBuscarPessoa = null;
     private DlgAgendarConsulta dlgAgendarConsulta = null;
 
-    private GerenciadorDominio gerenciadorDominio;
+    public GerenciadorDominio gerenciadorDominio;
 
     public GerenciadorInterface() {
         gerenciadorDominio = new GerenciadorDominio();
@@ -24,7 +28,7 @@ public class GerenciadorInterface {
     public GerenciadorDominio getGerenciadorDominio() {
         return gerenciadorDominio;
     }
-    
+
     // ABRIR JDIALOG
     private JDialog abrirJanela(java.awt.Frame parent, JDialog dlg, Class classe) {
         if (dlg == null) {
@@ -36,6 +40,28 @@ public class GerenciadorInterface {
         }
         dlg.setVisible(true);
         return dlg;
+    }
+
+    //CARREGAR COMBOBOX GENERICO
+    public DefaultComboBoxModel carregarComboBox(Class classe) {
+        try {
+            List lista = gerenciadorDominio.listar(classe);
+            return new DefaultComboBoxModel(lista.toArray());
+        } catch (HibernateException ex) {
+            JOptionPane.showMessageDialog(frmPrincipal, "Erro ao popular combobox. " + ex.getMessage());
+            return null;
+        }
+    }
+
+    // CARREGAR LISTA GENERICO
+    public void carregarListBox(JList listBox, Class classe) {
+        try {
+            List lista = gerenciadorDominio.listar(classe);
+            listBox.removeAll();
+            listBox.setListData(lista.toArray());
+        } catch (HibernateException ex) {
+            JOptionPane.showMessageDialog(frmPrincipal, "Erro ao carregar lista. " + ex.getMessage());
+        }
     }
 
     public void abrirDlgAgendarConsulta() {
@@ -64,7 +90,7 @@ public class GerenciadorInterface {
         }
         frmPrincipal.setVisible(true);
     }
-    
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

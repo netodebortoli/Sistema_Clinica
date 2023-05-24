@@ -1,7 +1,7 @@
 package Dao;
 
 import java.util.List;
-import org.hibernate.Criteria;
+import javax.persistence.criteria.CriteriaQuery;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
@@ -10,7 +10,7 @@ public class GenericoDao {
     public GenericoDao() {
     }
 
-    public void create(Object obj) throws HibernateException {
+    public void cadastrar(Object obj) throws HibernateException {
 
         Session session = null;
 
@@ -32,7 +32,7 @@ public class GenericoDao {
         }
     }
 
-    public void delete(Object obj) throws HibernateException {
+    public void deletar(Object obj) throws HibernateException {
 
         Session session = null;
 
@@ -54,7 +54,7 @@ public class GenericoDao {
         }
     }
 
-    public List read(Class classe) throws HibernateException {
+    public List listar(Class classe) throws HibernateException {
 
         Session session = null;
         List list = null;
@@ -64,8 +64,9 @@ public class GenericoDao {
             session.beginTransaction();
 
             // LENDO OS DADOS DO BANCO DE DADOS
-            Criteria consulta = session.createCriteria(classe);
-            list = consulta.list();
+            CriteriaQuery consulta = session.getCriteriaBuilder().createQuery(classe);
+            consulta.from(classe);
+            list = session.createQuery(consulta).getResultList();
 
             session.getTransaction().commit();
             session.close();
@@ -82,7 +83,7 @@ public class GenericoDao {
 
     }
 
-    public void update(Object obj) throws HibernateException {
+    public void atualizar(Object obj) throws HibernateException {
         Session session = null;
 
         try {

@@ -10,6 +10,8 @@ C:\Users\Aristides\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Jane
 C:\Users\Aristides\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Dao\ConexaoHibernate.java
 C:\Users\Aristides\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Controle\GerenciadorDominio.java
 C:\Users\Aristides\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Dominio\Paciente.java
+C:\Users\Aristides\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Dao\GenericoDao.java
 C:\Users\Aristides\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Janelas\DlgCadPaciente.java
+C:\Users\Aristides\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Dao\ConsultaDao.java
 C:\Users\Aristides\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Janelas\DlgCadMedico.java
 C:\Users\Aristides\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Janelas\DlgAgendarConsulta.java
