@@ -20,6 +20,8 @@ public class DlgCadMedico extends javax.swing.JDialog {
         super(parent, modal);
         this.gerIG = gerIG;
         initComponents();
+        cbUf.setSelectedIndex(-1);
+        cbUfCrm.setSelectedIndex(-1);
     }
 
     /**
@@ -44,15 +46,15 @@ public class DlgCadMedico extends javax.swing.JDialog {
         jLabel12 = new javax.swing.JLabel();
         txtCidade = new javax.swing.JTextField();
         txtCep = new javax.swing.JFormattedTextField();
-        txtUf = new javax.swing.JFormattedTextField();
+        cbUf = new javax.swing.JComboBox<>();
         painelDadosProfissionais2 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         txtCrm = new javax.swing.JFormattedTextField();
         jLabel19 = new javax.swing.JLabel();
-        txtUfCrm = new javax.swing.JTextField();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaEspecialidades = new javax.swing.JList<>();
+        cbUfCrm = new javax.swing.JComboBox<>();
         btnLimpar = new javax.swing.JButton();
         btnCadastrar = new javax.swing.JButton();
         pnDados = new javax.swing.JPanel();
@@ -100,15 +102,21 @@ public class DlgCadMedico extends javax.swing.JDialog {
             ex.printStackTrace();
         }
 
+        cbUf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO" }));
+        cbUf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbUfActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnEnderecoLayout = new javax.swing.GroupLayout(pnEndereco);
         pnEndereco.setLayout(pnEnderecoLayout);
         pnEnderecoLayout.setHorizontalGroup(
             pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnEnderecoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnEnderecoLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
+                        .addGap(16, 16, 16)
                         .addGroup(pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnEnderecoLayout.createSequentialGroup()
                                 .addComponent(jLabel10)
@@ -119,24 +127,27 @@ public class DlgCadMedico extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtCidade))
                             .addGroup(pnEnderecoLayout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtRua))))
+                                .addGroup(pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnEnderecoLayout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jLabel12)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cbUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pnEnderecoLayout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(pnEnderecoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBairro)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBairro)))
+                        .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(pnEnderecoLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtUf, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnEnderecoLayout.setVerticalGroup(
             pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,14 +164,15 @@ public class DlgCadMedico extends javax.swing.JDialog {
                     .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8)
+                        .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
+                    .addComponent(jLabel12)
+                    .addComponent(cbUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -173,6 +185,11 @@ public class DlgCadMedico extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCrm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCrmActionPerformed(evt);
+            }
+        });
 
         jLabel19.setText("UF");
 
@@ -197,38 +214,43 @@ public class DlgCadMedico extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        cbUfCrm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO" }));
+
         javax.swing.GroupLayout painelDadosProfissionais2Layout = new javax.swing.GroupLayout(painelDadosProfissionais2);
         painelDadosProfissionais2.setLayout(painelDadosProfissionais2Layout);
         painelDadosProfissionais2Layout.setHorizontalGroup(
             painelDadosProfissionais2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelDadosProfissionais2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(painelDadosProfissionais2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
+                    .addGroup(painelDadosProfissionais2Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel19))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelDadosProfissionais2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel18)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(painelDadosProfissionais2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUfCrm, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCrm, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCrm, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbUfCrm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         painelDadosProfissionais2Layout.setVerticalGroup(
             painelDadosProfissionais2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelDadosProfissionais2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(painelDadosProfissionais2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtCrm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18))
-                .addGap(29, 29, 29)
-                .addGroup(painelDadosProfissionais2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(txtUfCrm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60))
             .addGroup(painelDadosProfissionais2Layout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(painelDadosProfissionais2Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(painelDadosProfissionais2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtCrm, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(painelDadosProfissionais2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(cbUfCrm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnLimpar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -375,7 +397,7 @@ public class DlgCadMedico extends javax.swing.JDialog {
                         .addGroup(pnDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(11, 11, 11)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -434,9 +456,9 @@ public class DlgCadMedico extends javax.swing.JDialog {
         txtRua.setText("");
         txtNum.setText("");
         txtBairro.setText("");
-        txtUf.setText("");
+        cbUf.setSelectedIndex(-1);
         txtCrm.setText("");
-        txtUfCrm.setText("");
+        cbUfCrm.setSelectedIndex(-1);
         listaEspecialidades.clearSelection();
     }
 
@@ -472,7 +494,6 @@ public class DlgCadMedico extends javax.swing.JDialog {
 //            erro += "CPF inválido.\n";
 //            valido = false;
 //        }
-
         String cpf = txtCpf.getText();
         cpf = cpf.replace(".", "");
         cpf = cpf.replace(".", "");
@@ -505,28 +526,24 @@ public class DlgCadMedico extends javax.swing.JDialog {
         }
 
         if (txtRua.getText().trim().length() == 0) {
-            erro += "O preenchimento do rua é obrigatório.\n";
+            erro += "O preenchimento do nome da rua é obrigatório.\n";
             valido = false;
         }
 
         if (txtNum.getText().trim().length() > 0) {
             int numResidencia = Integer.parseInt(txtNum.getText());
-
             if (numResidencia < 0) {
-                erro += "O número de residência precisa ser maior que zero.\n";
+                erro += "O número de residência precisa ser maior que zero ou vazio.\n";
                 valido = false;
             }
-
-        } else {
-            txtNum.setText("-1");
-        }
+        } 
 
         if (txtBairro.getText().trim().length() == 0) {
             erro += "O preenchimento do bairro é obrigatório.\n";
             valido = false;
         }
 
-        if (txtUf.getText().trim().length() == 0) {
+        if (cbUf.getSelectedIndex() == -1) {
             erro += "O preenchimento da UF (Estado) é obrigatório.\n";
             valido = false;
         }
@@ -536,7 +553,7 @@ public class DlgCadMedico extends javax.swing.JDialog {
             valido = false;
         }
 
-        if (txtUfCrm.getText().trim().length() == 0) {
+        if (cbUfCrm.getSelectedIndex() == -1) {
             erro += "O preenchimento do UF do CRM é obrigatório.\n";
             valido = false;
         }
@@ -558,17 +575,23 @@ public class DlgCadMedico extends javax.swing.JDialog {
 
             String cpf = txtCpf.getText();
             String celular = txtCel.getText();
+            int crm = Integer.parseInt(txtCrm.getText());
+            List especialidades = listaEspecialidades.getSelectedValuesList();
+
+            Date dataNasc = null;
+            String sexo;
+            int numResidencia = -1;
+
             cpf = cpf.replace(".", "");
             cpf = cpf.replace(".", "");
             cpf = cpf.replace("-", "");
             celular = celular.replace("(", "");
             celular = celular.replace(")", "");
             celular = celular.replace("-", "");
-            List especialidades = listaEspecialidades.getSelectedValuesList();
-            int numResidencia = Integer.parseInt(txtNum.getText());
-            int crm = Integer.parseInt(txtCrm.getText());
-            Date dataNasc = null;
-            String sexo;
+
+            if (txtNum.getText().trim().length() > 0) {
+                numResidencia = Integer.parseInt(txtNum.getText());
+            }
 
             try {
                 dataNasc = FuncoesUteis.strToDate(txtDataNascimento.getText());
@@ -584,9 +607,9 @@ public class DlgCadMedico extends javax.swing.JDialog {
 
             JOptionPane.showMessageDialog(this, especialidades);
 
-            gerIG.gerenciadorDominio.cadastrarMedico(crm, txtUfCrm.getText(), especialidades, txtNome.getText().toUpperCase(),
+            gerIG.gerenciadorDominio.cadastrarMedico(crm, (String) cbUfCrm.getSelectedItem(), especialidades, txtNome.getText().toUpperCase(),
                     dataNasc, cpf, sexo, celular, txtCep.getText().replace("-", ""), txtCidade.getText().toUpperCase(),
-                    txtBairro.getText().toUpperCase(), txtRua.getText().toUpperCase(), numResidencia, txtUf.getText().toUpperCase()
+                    txtBairro.getText().toUpperCase(), txtRua.getText().toUpperCase(), numResidencia, (String) cbUf.getSelectedItem()
             );
 
             JOptionPane.showMessageDialog(this, "Médico cadastrado com sucesso.");
@@ -599,10 +622,20 @@ public class DlgCadMedico extends javax.swing.JDialog {
         gerIG.carregarListBox(listaEspecialidades, Especialidade.class);
     }//GEN-LAST:event_formComponentShown
 
+    private void cbUfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbUfActionPerformed
+
+    private void txtCrmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCrmActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCrmActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
     private javax.swing.ButtonGroup btnGrupoSexo;
     private javax.swing.JButton btnLimpar;
+    private javax.swing.JComboBox<String> cbUf;
+    private javax.swing.JComboBox<String> cbUfCrm;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -635,7 +668,5 @@ public class DlgCadMedico extends javax.swing.JDialog {
     private javax.swing.JTextField txtNome;
     private javax.swing.JFormattedTextField txtNum;
     private javax.swing.JTextField txtRua;
-    private javax.swing.JFormattedTextField txtUf;
-    private javax.swing.JTextField txtUfCrm;
     // End of variables declaration//GEN-END:variables
 }

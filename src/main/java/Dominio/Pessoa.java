@@ -46,7 +46,7 @@ public abstract class Pessoa implements Serializable {
     @Column (nullable = true)
     private int numero;
     
-    @Column (length = 50, nullable = false)
+    @Column (length = 2, nullable = false)
     private String uf;
 
     public Pessoa(String nome, Date dataNascimento, String cpf, String sexo, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {

@@ -12,7 +12,7 @@ public class Medico extends Pessoa {
     @Column(nullable = false, length = 10)
     private int crm;
 
-    @Column(nullable = false, length = 30, name = "crm_uf")
+    @Column(nullable = false, length = 2, name = "crm_uf")
     private String crmUf;
 
     @ManyToMany(fetch = FetchType.LAZY)

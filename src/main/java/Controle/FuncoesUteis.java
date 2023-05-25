@@ -20,6 +20,11 @@ public class FuncoesUteis {
     }
     
     public static boolean validarAnoNascimento(String dataNascimento) throws ParseException {
+        
+        if (dataNascimento.replaceAll("/", "").trim().length() == 0) {
+            return true;
+        }
+        
         int anoNasc = strToDate(dataNascimento).getYear();
         int anoAtual = new Date().getYear();
         return anoNasc > anoAtual;
