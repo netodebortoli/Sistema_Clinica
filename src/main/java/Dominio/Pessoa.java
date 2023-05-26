@@ -6,11 +6,11 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Entity
-@Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance (strategy = InheritanceType.JOINED)
 public abstract class Pessoa implements Serializable {
     
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "id_pessoa")
     private int id;
     

@@ -6,10 +6,11 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
+@PrimaryKeyJoinColumn(name = "id_medico")
 public class Medico extends Pessoa {
 
 //    @Column(nullable = false, length = 10, unique = true)
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false, length = 12)
     private int crm;
 
     @Column(nullable = false, length = 2, name = "crm_uf")

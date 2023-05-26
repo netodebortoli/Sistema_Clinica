@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
+@PrimaryKeyJoinColumn(name = "id_paciente")
 public class Paciente extends Pessoa {
     
     private String observacao;
