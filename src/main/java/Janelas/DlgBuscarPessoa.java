@@ -59,11 +59,27 @@ public class DlgBuscarPessoa extends javax.swing.JDialog {
             new String [] {
                 "Nome", "Sexo", "CPF", "Data de Nascimento"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblConsulta.setToolTipText("");
         tblConsulta.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
         tblConsulta.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblConsulta);
+        if (tblConsulta.getColumnModel().getColumnCount() > 0) {
+            tblConsulta.getColumnModel().getColumn(0).setResizable(false);
+            tblConsulta.getColumnModel().getColumn(1).setResizable(false);
+            tblConsulta.getColumnModel().getColumn(1).setPreferredWidth(0);
+            tblConsulta.getColumnModel().getColumn(2).setResizable(false);
+            tblConsulta.getColumnModel().getColumn(3).setResizable(false);
+            tblConsulta.getColumnModel().getColumn(3).setPreferredWidth(0);
+        }
 
         javax.swing.GroupLayout pnlTabelaLayout = new javax.swing.GroupLayout(pnlTabela);
         pnlTabela.setLayout(pnlTabelaLayout);

@@ -6,25 +6,25 @@ import org.hibernate.HibernateException;
 
 public class ConsultaDao extends GenericoDao {
 
-    private List<Consulta> pesquisar(int tipo) throws HibernateException {
+    private List<Consulta> pesquisar(int tipo, String pesq) throws HibernateException {
 
         return null;
     }
 
-    public List<Consulta> pesquisarData() {
-        return pesquisar(1);
+    public List<Consulta> pesquisarData(String pesq) {
+        return pesquisar(1, pesq);
     }
 
-    public List<Consulta> pesquisarMedico() {
-        return pesquisar(2);
+    public List<Consulta> pesquisarMedico(String pesq) {
+        return pesquisar(2, pesq);
     }
 
-    public List<Consulta> pesquisarPaciente() {
-        return pesquisar(3);
+    public List<Consulta> pesquisarPaciente(String pesq) {
+        return pesquisar(3, pesq);
     }
 
-    public List<Consulta> pesquisarEspecialidade() {
-        return pesquisar(4);
+    public List<Consulta> pesquisarEspecialidade(String pesq) {
+        return pesquisar(4, pesq);
     }
 
 }

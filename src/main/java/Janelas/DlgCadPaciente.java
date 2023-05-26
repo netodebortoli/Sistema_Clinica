@@ -4,6 +4,7 @@ import Controle.FuncoesUteis;
 import Controle.GerenciadorInterface;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class DlgCadPaciente extends javax.swing.JDialog {
@@ -20,6 +21,8 @@ public class DlgCadPaciente extends javax.swing.JDialog {
         super(parent, modal);
         this.gerIG = gerIG;
         initComponents();
+        cbUf.setSelectedIndex(-1);
+        cbTipoSangue.setSelectedIndex(-1);
     }
 
     /**
@@ -57,7 +60,7 @@ public class DlgCadPaciente extends javax.swing.JDialog {
         jLabel12 = new javax.swing.JLabel();
         txtCidade = new javax.swing.JTextField();
         txtCep = new javax.swing.JFormattedTextField();
-        txtUf = new javax.swing.JFormattedTextField();
+        cbUf = new javax.swing.JComboBox<>();
         painelObs = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaObs = new javax.swing.JTextArea();
@@ -186,20 +189,23 @@ public class DlgCadPaciente extends javax.swing.JDialog {
                 .addGroup(pnDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNome)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(pnDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnDadosLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDadosLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                        .addGroup(pnDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                        .addGap(18, 18, 18)))
+                .addGroup(pnDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(18, 18, 18)
                 .addGroup(pnDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(txtCel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -228,43 +234,51 @@ public class DlgCadPaciente extends javax.swing.JDialog {
             ex.printStackTrace();
         }
 
+        cbUf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO" }));
+
         javax.swing.GroupLayout pnEnderecoLayout = new javax.swing.GroupLayout(pnEndereco);
         pnEndereco.setLayout(pnEnderecoLayout);
         pnEnderecoLayout.setHorizontalGroup(
             pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnEnderecoLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnEnderecoLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
+                        .addGap(12, 12, 12)
+                        .addGroup(pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(pnEnderecoLayout.createSequentialGroup()
+                                    .addGap(0, 0, Short.MAX_VALUE)
+                                    .addComponent(jLabel7)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                .addGroup(pnEnderecoLayout.createSequentialGroup()
+                                    .addComponent(jLabel9)
+                                    .addGap(4, 4, 4)))
+                            .addGroup(pnEnderecoLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel10)
+                                .addGap(4, 4, 4)))
                         .addGroup(pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnEnderecoLayout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCidade, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
-                            .addGroup(pnEnderecoLayout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtRua))))
-                    .addGroup(pnEnderecoLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBairro)))
+                                .addComponent(txtCidade))
+                            .addGroup(pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(pnEnderecoLayout.createSequentialGroup()
+                                    .addComponent(txtBairro)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel8)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnEnderecoLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(pnEnderecoLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtUf, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnEnderecoLayout.setVerticalGroup(
             pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,15 +294,17 @@ public class DlgCadPaciente extends javax.swing.JDialog {
                     .addComponent(jLabel7)
                     .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addGroup(pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8)
+                        .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
+                    .addComponent(jLabel12)
+                    .addComponent(cbUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -400,8 +416,8 @@ public class DlgCadPaciente extends javax.swing.JDialog {
         txtRua.setText("");
         txtNum.setText("");
         txtBairro.setText("");
-        txtUf.setText("");
-        cbTipoSangue.setSelectedIndex(0);
+        cbUf.setSelectedIndex(-1);
+        cbTipoSangue.setSelectedIndex(-1);
         txtAreaObs.setText("");
     }
 
@@ -437,7 +453,6 @@ public class DlgCadPaciente extends javax.swing.JDialog {
 //            erro += "CPF inválido.\n";
 //            valido = false;
 //        }
-
         String cpf = txtCpf.getText();
         cpf = cpf.replace(".", "");
         cpf = cpf.replace(".", "");
@@ -477,11 +492,9 @@ public class DlgCadPaciente extends javax.swing.JDialog {
         if (txtNum.getText().trim().length() > 0) {
             int numResidencia = Integer.parseInt(txtNum.getText());
             if (numResidencia < 0) {
-                erro += "O número de residência precisa ser maior que zero.\n";
+                erro += "O número de residência precisa ser maior que zero ou vazio.\n";
                 valido = false;
             }
-        } else {
-            txtRua.setText("-1");
         }
 
         if (txtBairro.getText().trim().length() == 0) {
@@ -489,8 +502,13 @@ public class DlgCadPaciente extends javax.swing.JDialog {
             valido = false;
         }
 
-        if (txtUf.getText().trim().length() == 0) {
+        if (cbUf.getSelectedIndex() == -1) {
             erro += "O preenchimento da UF (Estado) é obrigatório.\n";
+            valido = false;
+        }
+
+        if (cbTipoSangue.getSelectedIndex() == -1) {
+            erro += "O preenchimento do tipo sanguíneo é obrigatório.\n";
             valido = false;
         }
 
@@ -505,16 +523,21 @@ public class DlgCadPaciente extends javax.swing.JDialog {
 
             String cpf = txtCpf.getText();
             String celular = txtCel.getText();
+
+            Integer numResidencia = null;
+            Date dataNasc = null;
+            String sexo;
+
             cpf = cpf.replace(".", "");
             cpf = cpf.replace(".", "");
             cpf = cpf.replace("-", "");
             celular = celular.replace("(", "");
             celular = celular.replace(")", "");
             celular = celular.replace("-", "");
-            int numResidencia = Integer.parseInt(txtNum.getText());
-            String tipoSanguineo = (String) cbTipoSangue.getSelectedItem();
-            Date dataNasc = null;
-            String sexo;
+
+            if (txtNum.getText().trim().length() > 0) {
+                numResidencia = Integer.valueOf(txtNum.getText());
+            }
 
             try {
                 dataNasc = FuncoesUteis.strToDate(txtDataNascimento.getText());
@@ -528,12 +551,14 @@ public class DlgCadPaciente extends javax.swing.JDialog {
                 sexo = "F";
             }
 
-            gerIG.gerenciadorDominio.cadastrarPaciente(txtAreaObs.getText(), tipoSanguineo, txtNome.getText().toUpperCase(),
-                    dataNasc, cpf, sexo, celular, txtCep.getText().replace("-", ""), txtCidade.getText().toUpperCase(),
-                    txtBairro.getText().toUpperCase(), txtRua.getText().toUpperCase(), numResidencia, txtUf.getText().toUpperCase()
+            gerIG.gerenciadorDominio.cadastrarPaciente(txtAreaObs.getText(), (String) cbTipoSangue.getSelectedItem(), 
+                    txtNome.getText().toUpperCase(),dataNasc, cpf, sexo, celular, txtCep.getText().replace("-", ""), 
+                    txtCidade.getText().toUpperCase(),txtBairro.getText().toUpperCase(), txtRua.getText().toUpperCase(), 
+                    numResidencia, (String) cbUf.getSelectedItem()
             );
 
             JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso.");
+            
             limparCampos();
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
@@ -543,6 +568,7 @@ public class DlgCadPaciente extends javax.swing.JDialog {
     private javax.swing.ButtonGroup btnGrupoSexo;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JComboBox<String> cbTipoSangue;
+    private javax.swing.JComboBox<String> cbUf;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -572,6 +598,5 @@ public class DlgCadPaciente extends javax.swing.JDialog {
     private javax.swing.JTextField txtNome;
     private javax.swing.JFormattedTextField txtNum;
     private javax.swing.JTextField txtRua;
-    private javax.swing.JFormattedTextField txtUf;
     // End of variables declaration//GEN-END:variables
 }

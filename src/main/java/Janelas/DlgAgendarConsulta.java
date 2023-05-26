@@ -10,14 +10,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Admin
- */
 public class DlgAgendarConsulta extends javax.swing.JDialog {
 
     GerenciadorInterface gerIG;
@@ -98,7 +93,7 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
         tblAgendamentos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblAgendamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"07h", "", "", ""},
+                {"07h", null, null, null},
                 {"08h", null, null, null},
                 {"09h", null, null, null},
                 {"10h", null, null, null},
@@ -106,8 +101,8 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
                 {"12h", null, null, null},
                 {"13h", null, null, null},
                 {"14h", null, null, null},
-                {"15h", "", "", ""},
-                {"16h", "", "", null},
+                {"15h", null, null, null},
+                {"16h", null, null, null},
                 {"17h", null, null, null},
                 {"18h", null, null, null}
             },
@@ -115,24 +110,39 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
                 "Horário", "Médico", "Paciente", "Modalidade"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tblAgendamentos.setToolTipText("Selecione um horário da consulta disponível");
-        tblAgendamentos.setAutoscrolls(false);
+        tblAgendamentos.setToolTipText("Selecione um horário de consulta disponível");
         tblAgendamentos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblAgendamentos.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        tblAgendamentos.setFocusable(false);
         tblAgendamentos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblAgendamentos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblAgendamentos.setShowGrid(false);
         tblAgendamentos.setShowHorizontalLines(true);
         tblAgendamentos.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblAgendamentos);
+        if (tblAgendamentos.getColumnModel().getColumnCount() > 0) {
+            tblAgendamentos.getColumnModel().getColumn(0).setResizable(false);
+            tblAgendamentos.getColumnModel().getColumn(0).setPreferredWidth(0);
+            tblAgendamentos.getColumnModel().getColumn(1).setResizable(false);
+            tblAgendamentos.getColumnModel().getColumn(2).setResizable(false);
+            tblAgendamentos.getColumnModel().getColumn(3).setResizable(false);
+            tblAgendamentos.getColumnModel().getColumn(3).setPreferredWidth(0);
+        }
 
         pnAgendamentos.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -345,9 +355,8 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
     }
 
     private void btnBuscarConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarConsultasActionPerformed
-        if (validarDataConsulta()) {
-            //gerIG.gerenciadorDominio.buscarConsultas();
-        }
+        // APÓS VALIDAR A DATA DA CONSULTA, 
+        //PREENCHER A TABELA COM OS DADOS DE CONSULTAS PREVIAMENTE AGENDADAS
     }//GEN-LAST:event_btnBuscarConsultasActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
@@ -356,7 +365,7 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
 
             int linhaSelecionada = tblAgendamentos.getSelectedRow();
 
-            if (tblAgendamentos.getValueAt(tblAgendamentos.getSelectedRow(), 1) == null) {
+            if (tblAgendamentos.getValueAt(linhaSelecionada, 1) == null) {
 
                 String data = txtData.getText();
                 Date dataConsulta = null;
@@ -367,14 +376,15 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this, "Erro ao converter data da consulta. " + ex);
                 }
 
-                Medico med = (Medico) cbMedico.getSelectedItem();
-                Paciente pac = (Paciente) cbPaciente.getSelectedItem();
-                Especialidade esp = (Especialidade) cbModalidade.getSelectedItem();
+                Medico medico = (Medico) cbMedico.getSelectedItem();
+                Paciente paciente = (Paciente) cbPaciente.getSelectedItem();
+                Especialidade modalidade = (Especialidade) cbModalidade.getSelectedItem();
                 String horarioConsulta = (String) tblAgendamentos.getValueAt(linhaSelecionada, 0);
 
-                gerIG.gerenciadorDominio.cadastrarConsulta(dataConsulta, horarioConsulta, med, pac, esp);
+                gerIG.gerenciadorDominio.cadastrarConsulta(dataConsulta, horarioConsulta, medico, paciente, modalidade);
 
                 JOptionPane.showMessageDialog(this, "Consulta agendada com sucesso.");
+                
                 limparCampos();
 
             } else {

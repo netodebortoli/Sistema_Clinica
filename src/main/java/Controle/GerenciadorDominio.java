@@ -24,13 +24,13 @@ public class GerenciadorDominio {
     }
 
     public void cadastrarMedico(int crm, String crmUf, List<Especialidade> especialidades, String nome, Date dataNascimento, String cpf, String sexo,
-            String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
+            String celular, String cep, String cidade, String bairro, String rua, Integer numero, String uf) {
         Medico med = new Medico(crm, crmUf, especialidades, nome, dataNascimento, cpf, sexo, celular, cep, cidade, bairro, rua, numero, uf);
         genericoDao.cadastrar(med);
     }
 
     public void cadastrarPaciente(String observacao, String tipoSanguineo, String nome, Date dataNascimento, String cpf, String sexo,
-            String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
+            String celular, String cep, String cidade, String bairro, String rua, Integer numero, String uf) {
         Paciente paciente = new Paciente(observacao, tipoSanguineo, nome, dataNascimento, cpf, sexo, celular, cep, cidade, bairro, rua, numero, uf);
         genericoDao.cadastrar(paciente);
     }

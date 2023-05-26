@@ -65,10 +65,26 @@ public class DlgListarConsulta extends javax.swing.JDialog {
             new String [] {
                 "Data", "Médico", "Paciente", "Modalidade"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblConsulta.setAutoscrolls(false);
         tblConsulta.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblConsulta);
+        if (tblConsulta.getColumnModel().getColumnCount() > 0) {
+            tblConsulta.getColumnModel().getColumn(0).setResizable(false);
+            tblConsulta.getColumnModel().getColumn(0).setPreferredWidth(0);
+            tblConsulta.getColumnModel().getColumn(1).setResizable(false);
+            tblConsulta.getColumnModel().getColumn(2).setResizable(false);
+            tblConsulta.getColumnModel().getColumn(3).setResizable(false);
+            tblConsulta.getColumnModel().getColumn(3).setPreferredWidth(0);
+        }
 
         javax.swing.GroupLayout pnlTabelaLayout = new javax.swing.GroupLayout(pnlTabela);
         pnlTabela.setLayout(pnlTabelaLayout);

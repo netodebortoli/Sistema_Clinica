@@ -29,7 +29,7 @@ public class Medico extends Pessoa {
             orphanRemoval = true)
     private List<Consulta> consultas = new ArrayList();
 
-    public Medico(int crm, String crmUf, List<Especialidade> especialidades, String nome, Date dataNascimento, String cpf, String sexo, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
+    public Medico(int crm, String crmUf, List<Especialidade> especialidades, String nome, Date dataNascimento, String cpf, String sexo, String celular, String cep, String cidade, String bairro, String rua, Integer numero, String uf) {
         super(nome, dataNascimento, cpf, sexo, celular, cep, cidade, bairro, rua, numero, uf);
         this.crm = crm;
         this.crmUf = crmUf;

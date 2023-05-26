@@ -30,6 +30,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setResizable(false);
 
         mnuCad.setText("Cadastro");
+        mnuCad.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         mnuCadPaciente.setText("Paciente");
         mnuCadPaciente.addActionListener(new java.awt.event.ActionListener() {
@@ -50,6 +51,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(mnuCad);
 
         mnuConsulta.setText("Consulta Médica");
+        mnuConsulta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         mnuConsultaAgendar.setText("Agendar");
         mnuConsultaAgendar.addActionListener(new java.awt.event.ActionListener() {
@@ -70,6 +72,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(mnuConsulta);
 
         mnuBusca.setText("Buscar");
+        mnuBusca.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         mnuBuscarPessoas.setText("Pessoas");
         mnuBuscarPessoas.addActionListener(new java.awt.event.ActionListener() {
@@ -91,7 +94,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 315, Short.MAX_VALUE)
+            .addGap(0, 311, Short.MAX_VALUE)
         );
 
         pack();

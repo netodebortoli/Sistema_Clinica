@@ -44,12 +44,12 @@ public abstract class Pessoa implements Serializable {
     private String rua;
     
     @Column (nullable = true)
-    private int numero;
+    private Integer numero;
     
     @Column (length = 2, nullable = false)
     private String uf;
 
-    public Pessoa(String nome, Date dataNascimento, String cpf, String sexo, String celular, String cep, String cidade, String bairro, String rua, int numero, String uf) {
+    public Pessoa(String nome, Date dataNascimento, String cpf, String sexo, String celular, String cep, String cidade, String bairro, String rua, Integer numero, String uf) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.cpf = cpf;
@@ -141,11 +141,11 @@ public abstract class Pessoa implements Serializable {
         this.rua = rua;
     }
 
-    public int getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 
