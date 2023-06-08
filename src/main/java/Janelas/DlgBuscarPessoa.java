@@ -1,20 +1,27 @@
 package Janelas;
 
 import Controle.GerenciadorInterface;
+import Dominio.Pessoa;
+import java.text.ParseException;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Admin
- */
 public class DlgBuscarPessoa extends javax.swing.JDialog {
 
-    
-    GerenciadorInterface gerIG;
-    
+    private GerenciadorInterface gerIG;
+    private Pessoa pessoaSelecionada;
+
     public DlgBuscarPessoa(java.awt.Frame parent, boolean modal, GerenciadorInterface gerIG) {
         super(parent, modal);
         this.gerIG = gerIG;
         initComponents();
+        limparCampos();
+        pessoaSelecionada = null;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoaSelecionada;
     }
 
     /**
@@ -28,57 +35,65 @@ public class DlgBuscarPessoa extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         cbTipoPessoa = new javax.swing.JComboBox<>();
-        btnPesquisar = new javax.swing.JButton();
         txtNome = new javax.swing.JTextField();
         pnlTabela = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblConsulta = new javax.swing.JTable();
-        btnEditar = new javax.swing.JButton();
+        tblPessoas = new javax.swing.JTable();
         btnExcluir = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnPesquisar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sisclinica - Pesquisar Pessoas \t");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Pesquisa por:");
 
         cbTipoPessoa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbTipoPessoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Médico", "Paciente" }));
-
-        btnPesquisar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnPesquisar.setForeground(new java.awt.Color(0, 51, 204));
-        btnPesquisar.setText("Pesquisar");
+        cbTipoPessoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Médico", "Paciente" }));
 
         pnlTabela.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listagem de Pessoas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
-        tblConsulta.setModel(new javax.swing.table.DefaultTableModel(
+        tblPessoas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nome", "Sexo", "CPF", "Data de Nascimento"
+                "Tipo", "Nome", "Sexo", "CPF", "Data de Nascimento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tblConsulta.setToolTipText("");
-        tblConsulta.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
-        tblConsulta.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tblConsulta);
-        if (tblConsulta.getColumnModel().getColumnCount() > 0) {
-            tblConsulta.getColumnModel().getColumn(0).setResizable(false);
-            tblConsulta.getColumnModel().getColumn(1).setResizable(false);
-            tblConsulta.getColumnModel().getColumn(1).setPreferredWidth(0);
-            tblConsulta.getColumnModel().getColumn(2).setResizable(false);
-            tblConsulta.getColumnModel().getColumn(3).setResizable(false);
-            tblConsulta.getColumnModel().getColumn(3).setPreferredWidth(0);
+        tblPessoas.setToolTipText("");
+        tblPessoas.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+        tblPessoas.setFocusable(false);
+        tblPessoas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblPessoas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblPessoas.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblPessoas);
+        if (tblPessoas.getColumnModel().getColumnCount() > 0) {
+            tblPessoas.getColumnModel().getColumn(0).setResizable(false);
+            tblPessoas.getColumnModel().getColumn(0).setPreferredWidth(5);
+            tblPessoas.getColumnModel().getColumn(1).setResizable(false);
+            tblPessoas.getColumnModel().getColumn(1).setPreferredWidth(15);
+            tblPessoas.getColumnModel().getColumn(2).setResizable(false);
+            tblPessoas.getColumnModel().getColumn(2).setPreferredWidth(-5);
+            tblPessoas.getColumnModel().getColumn(3).setResizable(false);
+            tblPessoas.getColumnModel().getColumn(3).setPreferredWidth(0);
+            tblPessoas.getColumnModel().getColumn(4).setResizable(false);
+            tblPessoas.getColumnModel().getColumn(4).setPreferredWidth(15);
         }
 
         javax.swing.GroupLayout pnlTabelaLayout = new javax.swing.GroupLayout(pnlTabela);
@@ -97,13 +112,31 @@ public class DlgBuscarPessoa extends javax.swing.JDialog {
                 .addGap(0, 10, Short.MAX_VALUE))
         );
 
-        btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnEditar.setForeground(new java.awt.Color(255, 102, 0));
-        btnEditar.setText("Editar");
-
         btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnExcluir.setForeground(new java.awt.Color(255, 0, 0));
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnEditar.setForeground(new java.awt.Color(0, 0, 153));
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        btnPesquisar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,24 +144,22 @@ public class DlgBuscarPessoa extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlTabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtNome)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cbTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(252, 252, 252))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,19 +170,112 @@ public class DlgBuscarPessoa extends javax.swing.JDialog {
                     .addComponent(cbTipoPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPesquisar)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesquisar))
                 .addGap(18, 18, 18)
                 .addComponent(pnlTabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEditar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnExcluir)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+
+        int usuarioSelecionado = tblPessoas.getSelectedRow();
+
+        if (usuarioSelecionado >= 0) {
+            if (JOptionPane.showConfirmDialog(this,
+                    "Deseja editar a pessoa selecionada?",
+                    "Editar Pessoa", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+                pessoaSelecionada = (Pessoa) tblPessoas.getValueAt(usuarioSelecionado, 1);
+                limparCampos();
+                this.setVisible(false);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Para excluir, selecione uma pessoa da tabela.");
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void limparCampos() {
+        cbTipoPessoa.setSelectedIndex(-1);
+        txtNome.setText("");
+        ((DefaultTableModel) tblPessoas.getModel()).setNumRows(0);
+    }
+
+    private boolean validarCamposPreenchidos() {
+
+        boolean valido = true;
+        String mensagemErro = "";
+
+        if (txtNome.getText().trim().length() < 4) {
+            valido = false;
+            mensagemErro += "Nome inválido."
+                    + "\nDigite um nome com pelo menos 4 caracteres.\n";
+        }
+
+        if (cbTipoPessoa.getSelectedIndex() == -1) {
+            valido = false;
+            mensagemErro += "Selecione o tipo de pessoa que será consultada.";
+        }
+
+        if (!valido) {
+            JOptionPane.showMessageDialog(this, mensagemErro);
+        }
+
+        return valido;
+    }
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        try {
+            if (validarCamposPreenchidos()) {
+
+                String nomePesquisado = txtNome.getText();
+                int tipoPesquisa = cbTipoPessoa.getSelectedIndex();
+
+                ((DefaultTableModel) tblPessoas.getModel()).setNumRows(0);
+
+                List<Pessoa> listaPessoas = gerIG.gerenciadorDominio.pesquisarPessoas(nomePesquisado, tipoPesquisa);
+                
+                for (Pessoa p : listaPessoas) {
+                    ((DefaultTableModel) tblPessoas.getModel()).addRow(p.toArray());
+                }
+            }
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao pesquisar pessoas.\n" + ex);
+        }
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+
+        int usuarioSelecionado = tblPessoas.getSelectedRow();
+
+        if (usuarioSelecionado >= 0) {
+
+            Pessoa p = (Pessoa) tblPessoas.getValueAt(usuarioSelecionado, 0);
+
+            if (JOptionPane.showConfirmDialog(this,
+                    "Deseja realmente excluir a pessoa?",
+                    "Excluir Pessoa", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+                ((DefaultTableModel) tblPessoas.getModel()).removeRow(usuarioSelecionado);
+                JOptionPane.showMessageDialog(this, "Registro excluído com sucesso.");
+                gerIG.gerenciadorDominio.excluir(p);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Para excluir, selecione uma pessoa da tabela.");
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        limparCampos();
+        pessoaSelecionada = null;
+    }//GEN-LAST:event_formWindowClosing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
@@ -161,7 +285,7 @@ public class DlgBuscarPessoa extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnlTabela;
-    private javax.swing.JTable tblConsulta;
+    private javax.swing.JTable tblPessoas;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }

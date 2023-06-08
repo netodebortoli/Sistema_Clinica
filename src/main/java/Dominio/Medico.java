@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id_medico")
-public class Medico extends Pessoa {
+public class Medico extends Pessoa implements java.io.Serializable {
 
 //    @Column(nullable = false, length = 10, unique = true)
     @Column(nullable = false, length = 12)
@@ -16,7 +16,7 @@ public class Medico extends Pessoa {
     @Column(nullable = false, length = 2, name = "crm_uf")
     private String crmUf;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "medico_especialidade",
             joinColumns = {
                 @JoinColumn(name = "id_medico")},

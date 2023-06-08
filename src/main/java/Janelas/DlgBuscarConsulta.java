@@ -2,8 +2,6 @@ package Janelas;
 
 import Controle.GerenciadorInterface;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
@@ -12,14 +10,15 @@ import javax.swing.text.MaskFormatter;
  *
  * @author Admin
  */
-public class DlgListarConsulta extends javax.swing.JDialog {
+public class DlgBuscarConsulta extends javax.swing.JDialog {
 
     GerenciadorInterface gerIG;
 
-    public DlgListarConsulta(java.awt.Frame parent, boolean modal, GerenciadorInterface gerIG) {
+    public DlgBuscarConsulta(java.awt.Frame parent, boolean modal, GerenciadorInterface gerIG) {
         super(parent, modal);
         this.gerIG = gerIG;
         initComponents();
+        cbTipoConsulta.setSelectedIndex(0);
     }
 
     /**
@@ -38,7 +37,7 @@ public class DlgListarConsulta extends javax.swing.JDialog {
         tblConsulta = new javax.swing.JTable();
         btnPesquisar = new javax.swing.JButton();
         txtPesquisa = new javax.swing.JFormattedTextField();
-        btnCadastrar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -46,7 +45,7 @@ public class DlgListarConsulta extends javax.swing.JDialog {
         setResizable(false);
 
         cbTipoConsulta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbTipoConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "Data", "Médico", "Paciente", "Modalidade" }));
+        cbTipoConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Data", "Médico", "Paciente", "Modalidade", "Todas" }));
         cbTipoConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoConsultaActionPerformed(evt);
@@ -103,17 +102,11 @@ public class DlgListarConsulta extends javax.swing.JDialog {
         );
 
         btnPesquisar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnPesquisar.setForeground(new java.awt.Color(0, 51, 204));
         btnPesquisar.setText("Pesquisar");
 
-        btnCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnCadastrar.setForeground(new java.awt.Color(255, 102, 0));
-        btnCadastrar.setText("Editar");
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarActionPerformed(evt);
-            }
-        });
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnEditar.setForeground(new java.awt.Color(0, 0, 153));
+        btnEditar.setText("Editar");
 
         btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnExcluir.setForeground(new java.awt.Color(255, 0, 0));
@@ -125,7 +118,11 @@ public class DlgListarConsulta extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -136,12 +133,6 @@ public class DlgListarConsulta extends javax.swing.JDialog {
                             .addComponent(btnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(pnlTabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(250, 250, 250))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,19 +147,15 @@ public class DlgListarConsulta extends javax.swing.JDialog {
                     .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlTabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(btnCadastrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnExcluir)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void cbTipoConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoConsultaActionPerformed
 
@@ -177,10 +164,9 @@ public class DlgListarConsulta extends javax.swing.JDialog {
             txtPesquisa.setValue(null);
             
             if (cbTipoConsulta.getSelectedItem().equals("Data")) {
-                
                 txtPesquisa.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("##/##/####")));
             } else {
-                txtPesquisa.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("************************")));
+                txtPesquisa.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("**************************")));
             }
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(this, "Erro na pré-formatação no campo de pesquisa.");
@@ -188,7 +174,7 @@ public class DlgListarConsulta extends javax.swing.JDialog {
     }//GEN-LAST:event_cbTipoConsultaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JComboBox<String> cbTipoConsulta;

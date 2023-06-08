@@ -29,6 +29,7 @@ public class GenericoDao {
                 session.getTransaction().rollback();
                 session.close();
             }
+            throw new HibernateException(erro);
         }
     }
 
@@ -51,6 +52,7 @@ public class GenericoDao {
                 session.getTransaction().rollback();
                 session.close();
             }
+            throw new HibernateException(erro);
         }
     }
 
@@ -101,6 +103,7 @@ public class GenericoDao {
                 session.getTransaction().rollback();
                 session.close();
             }
+            throw new HibernateException(erro);
         }
     }
 }

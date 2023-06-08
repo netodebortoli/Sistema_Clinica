@@ -3,8 +3,9 @@ C:\Users\Aristides\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Domi
 C:\Users\Aristides\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Janelas\DlgBuscarPessoa.java
 C:\Users\Aristides\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Controle\FuncoesUteis.java
 C:\Users\Aristides\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Dominio\Especialidade.java
-C:\Users\Aristides\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Janelas\DlgListarConsulta.java
+C:\Users\Aristides\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Janelas\DlgBuscarConsulta.java
 C:\Users\Aristides\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Controle\GerenciadorInterface.java
+C:\Users\Aristides\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Dao\PessoaDao.java
 C:\Users\Aristides\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Dominio\Pessoa.java
 C:\Users\Aristides\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Janelas\FrmPrincipal.java
 C:\Users\Aristides\Documents\NetBeansProjects\Sistema_Clinica\src\main\java\Dao\ConexaoHibernate.java

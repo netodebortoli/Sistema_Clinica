@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id_paciente")
-public class Paciente extends Pessoa {
+public class Paciente extends Pessoa implements java.io.Serializable {
     
     private String observacao;
 

@@ -2,6 +2,7 @@ package Janelas;
 
 import Controle.FuncoesUteis;
 import Controle.GerenciadorInterface;
+import Dominio.Consulta;
 import Dominio.Especialidade;
 import Dominio.Medico;
 import Dominio.Paciente;
@@ -12,10 +13,12 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import org.hibernate.HibernateException;
 
 public class DlgAgendarConsulta extends javax.swing.JDialog {
 
-    GerenciadorInterface gerIG;
+    private GerenciadorInterface gerIG;
 
     /**
      * Creates new form DlgAgendarConsulta
@@ -55,6 +58,7 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         cbModalidade = new javax.swing.JComboBox<>();
         btnLimpar = new javax.swing.JToggleButton();
+        btnExcluir = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sisclinica - Agendar Consulta");
@@ -79,7 +83,7 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
         }
 
         btnBuscarConsultas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnBuscarConsultas.setForeground(new java.awt.Color(0, 255, 0));
+        btnBuscarConsultas.setForeground(new java.awt.Color(51, 204, 0));
         btnBuscarConsultas.setText("Buscar Consultas");
         btnBuscarConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,7 +94,6 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
         pnAgendamentos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Agendamentos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
         pnAgendamentos.setLayout(new java.awt.BorderLayout());
 
-        tblAgendamentos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblAgendamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"07h", null, null, null},
@@ -147,7 +150,7 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
         pnAgendamentos.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         btnCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnCadastrar.setForeground(new java.awt.Color(0, 51, 204));
+        btnCadastrar.setForeground(new java.awt.Color(0, 0, 153));
         btnCadastrar.setText("Cadastrar Consulta");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,11 +218,20 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
         );
 
         btnLimpar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnLimpar.setForeground(new java.awt.Color(255, 51, 51));
+        btnLimpar.setForeground(new java.awt.Color(255, 153, 0));
         btnLimpar.setText("Limpar Campos");
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimparActionPerformed(evt);
+            }
+        });
+
+        btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnExcluir.setForeground(new java.awt.Color(255, 0, 0));
+        btnExcluir.setText("Excluir Consulta");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
             }
         });
 
@@ -233,9 +245,9 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
                 .addComponent(lbTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(162, 162, 162))
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pnAgendamentos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
@@ -247,11 +259,13 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnBuscarConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(205, 205, 205)
-                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnCadastrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,18 +276,22 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscarConsultas)))
-                    .addComponent(jLabel5))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGap(1, 1, 1)
+                            .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel5))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnBuscarConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLimpar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnAgendamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -286,6 +304,7 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
         cbPaciente.setSelectedIndex(-1);
         cbMedico.setSelectedIndex(-1);
         cbModalidade.setSelectedIndex(-1);
+        limparCamposTabela();
     }
 
     private boolean validarCamposPreenchidos() {
@@ -349,43 +368,72 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
             }
 
         } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao converter data. " + ex);
+            JOptionPane.showMessageDialog(this, "Erro ao converter data da consulta.\n" + ex);
             return false;
         }
     }
 
+    private void limparDadosCelula(int linha) {
+        for (int i = 1; i < tblAgendamentos.getColumnCount(); i++) {
+            ((DefaultTableModel) tblAgendamentos.getModel()).setValueAt(null, linha, i);
+        }
+    }
+
+    private void limparCamposTabela() {
+        for (int i = 0; i < tblAgendamentos.getRowCount(); i++) {
+            limparDadosCelula(i);
+        }
+    }
+
     private void btnBuscarConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarConsultasActionPerformed
-        // APÓS VALIDAR A DATA DA CONSULTA, 
-        //PREENCHER A TABELA COM OS DADOS DE CONSULTAS PREVIAMENTE AGENDADAS
+
+        if (validarDataConsulta()) {
+
+            try {
+                List<Consulta> listaConsultas = gerIG.gerenciadorDominio.pesquisarConsulta(txtData.getText(), 0);
+
+                limparCamposTabela();
+
+                for (Consulta c : listaConsultas) {
+                    for (int j = 0; j < tblAgendamentos.getRowCount(); j++) {
+                        if (c.getHorario().equals(tblAgendamentos.getValueAt(j, 0))) {
+                            ((DefaultTableModel) tblAgendamentos.getModel()).setValueAt(c.getMedico(), j, 1);
+                            ((DefaultTableModel) tblAgendamentos.getModel()).setValueAt(c, j, 2);
+                            ((DefaultTableModel) tblAgendamentos.getModel()).setValueAt(c.getEspecialidade(), j, 3);
+                        }
+                    }
+                }
+            } catch (HibernateException | ParseException ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao buscar consultas.\n" + ex);
+            }
+        }
     }//GEN-LAST:event_btnBuscarConsultasActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-
         if (validarCamposPreenchidos() && validarDataConsulta()) {
 
             int linhaSelecionada = tblAgendamentos.getSelectedRow();
 
             if (tblAgendamentos.getValueAt(linhaSelecionada, 1) == null) {
 
-                String data = txtData.getText();
-                Date dataConsulta = null;
-
                 try {
-                    dataConsulta = FuncoesUteis.strToDate(data);
+                    String data = txtData.getText();
+                    Date dataConsulta = FuncoesUteis.strToDate(data);
+
+                    Medico medico = (Medico) cbMedico.getSelectedItem();
+                    Paciente paciente = (Paciente) cbPaciente.getSelectedItem();
+                    Especialidade modalidade = (Especialidade) cbModalidade.getSelectedItem();
+                    String horarioConsulta = (String) tblAgendamentos.getValueAt(linhaSelecionada, 0);
+
+                    gerIG.gerenciadorDominio.cadastrarConsulta(dataConsulta, horarioConsulta, medico, paciente, modalidade);
+
+                    JOptionPane.showMessageDialog(this, "Consulta agendada com sucesso.");
+
+                    limparCampos();
+
                 } catch (ParseException ex) {
-                    JOptionPane.showMessageDialog(this, "Erro ao converter data da consulta. " + ex);
+                    JOptionPane.showMessageDialog(this, "Erro ao cadastrar consulta ao converter data.\n" + ex);
                 }
-
-                Medico medico = (Medico) cbMedico.getSelectedItem();
-                Paciente paciente = (Paciente) cbPaciente.getSelectedItem();
-                Especialidade modalidade = (Especialidade) cbModalidade.getSelectedItem();
-                String horarioConsulta = (String) tblAgendamentos.getValueAt(linhaSelecionada, 0);
-
-                gerIG.gerenciadorDominio.cadastrarConsulta(dataConsulta, horarioConsulta, medico, paciente, modalidade);
-
-                JOptionPane.showMessageDialog(this, "Consulta agendada com sucesso.");
-                
-                limparCampos();
 
             } else {
                 JOptionPane.showMessageDialog(this, "Horário indisponível para consulta.");
@@ -412,9 +460,37 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
         limparCampos();
     }//GEN-LAST:event_btnLimparActionPerformed
 
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+
+        int linhaSelecionada = tblAgendamentos.getSelectedRow();
+        
+        if (linhaSelecionada >= 0) {
+            if (tblAgendamentos.getValueAt(linhaSelecionada, 1) != null) {
+
+                Consulta c = (Consulta) tblAgendamentos.getValueAt(linhaSelecionada, 2);
+
+                if (JOptionPane.showConfirmDialog(this,
+                        "Deseja realmente excluir a consulta?",
+                        "Excluir Consulta", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+                    limparDadosCelula(linhaSelecionada);
+                    JOptionPane.showMessageDialog(this, "A consulta às " + c.getHorario() + " foi apagada.");
+                    gerIG.gerenciadorDominio.excluir(c);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Selecione uma consulta agendada para excluir.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Para excluir, selecione uma consulta da tabela.");
+        }
+
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarConsultas;
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JToggleButton btnExcluir;
     private javax.swing.JToggleButton btnLimpar;
     private javax.swing.JComboBox<String> cbMedico;
     private javax.swing.JComboBox<String> cbModalidade;

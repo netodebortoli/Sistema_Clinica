@@ -1,5 +1,6 @@
 package Controle;
 
+import Dominio.Pessoa;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,13 +19,20 @@ public class FuncoesUteis {
         dtForm.setLenient(false);
         return dtForm.format(dt);
     }
-    
+
+    public static String formatterCpf(String cpf) throws ParseException {
+        String pt1 = cpf.substring(0, 3);
+        String pt2 = cpf.substring(3, 6);
+        String pt3 = cpf.substring(6, 9);
+        String pt4 = cpf.substring(9);
+        return pt1 + "." + pt2 + "." + pt3 + "-" + pt4;
+    }
+
     public static boolean validarAnoNascimento(String dataNascimento) throws ParseException {
-        
         if (dataNascimento.replaceAll("/", "").trim().length() == 0) {
             return true;
         }
-        
+
         int anoNasc = strToDate(dataNascimento).getYear();
         int anoAtual = new Date().getYear();
         return anoNasc > anoAtual;
@@ -45,7 +53,7 @@ public class FuncoesUteis {
                 || cpf.equals("66666666666") || cpf.equals("77777777777")
                 || cpf.equals("88888888888") || cpf.equals("99999999999")
                 || (cpf.length() != 11)) {
-            
+
             return false;
         }
 

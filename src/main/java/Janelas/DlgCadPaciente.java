@@ -2,27 +2,22 @@ package Janelas;
 
 import Controle.FuncoesUteis;
 import Controle.GerenciadorInterface;
+import Dominio.Paciente;
+import Dominio.Pessoa;
 import java.text.ParseException;
 import java.util.Date;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 public class DlgCadPaciente extends javax.swing.JDialog {
 
-    GerenciadorInterface gerIG;
+    private GerenciadorInterface gerIG;
+    private Paciente pacienteSelecionado;
 
-    /**
-     * Creates new form DlgCadPaciente
-     *
-     * @param parent
-     * @param modal
-     */
     public DlgCadPaciente(java.awt.Frame parent, boolean modal, GerenciadorInterface gerIG) {
         super(parent, modal);
         this.gerIG = gerIG;
         initComponents();
-        cbUf.setSelectedIndex(-1);
-        cbTipoSangue.setSelectedIndex(-1);
+        pacienteSelecionado = null;
     }
 
     /**
@@ -48,6 +43,7 @@ public class DlgCadPaciente extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         radioMasc = new javax.swing.JRadioButton();
         radioFem = new javax.swing.JRadioButton();
+        btnPesq = new javax.swing.JButton();
         pnEndereco = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         txtRua = new javax.swing.JTextField();
@@ -68,10 +64,16 @@ public class DlgCadPaciente extends javax.swing.JDialog {
         cbTipoSangue = new javax.swing.JComboBox<>();
         btnLimpar = new javax.swing.JButton();
         btnCadastrar = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sisclinica - Paciente");
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         pnDados.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
@@ -147,6 +149,14 @@ public class DlgCadPaciente extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        btnPesq.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnPesq.setText("Pesquisar");
+        btnPesq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesqActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnDadosLayout = new javax.swing.GroupLayout(pnDados);
         pnDados.setLayout(pnDadosLayout);
         pnDadosLayout.setHorizontalGroup(
@@ -157,22 +167,24 @@ public class DlgCadPaciente extends javax.swing.JDialog {
                     .addGroup(pnDadosLayout.createSequentialGroup()
                         .addGroup(pnDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnDadosLayout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnDadosLayout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnDadosLayout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(207, 207, 207)
                         .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnDadosLayout.createSequentialGroup()
                         .addGroup(pnDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnDadosLayout.createSequentialGroup()
                                 .addComponent(labelNome)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnPesq, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(pnDadosLayout.createSequentialGroup()
@@ -188,12 +200,13 @@ public class DlgCadPaciente extends javax.swing.JDialog {
                 .addGap(5, 5, 5)
                 .addGroup(pnDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNome)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesq))
                 .addGroup(pnDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnDadosLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDadosLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -260,16 +273,15 @@ public class DlgCadPaciente extends javax.swing.JDialog {
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtCidade))
-                            .addGroup(pnEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(pnEnderecoLayout.createSequentialGroup()
-                                    .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(0, 0, Short.MAX_VALUE))
-                                .addGroup(pnEnderecoLayout.createSequentialGroup()
-                                    .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(4, 4, 4)
-                                    .addComponent(jLabel8)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtNum)))))
+                            .addGroup(pnEnderecoLayout.createSequentialGroup()
+                                .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(pnEnderecoLayout.createSequentialGroup()
+                                .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNum))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnEnderecoLayout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(jLabel12)
@@ -346,7 +358,7 @@ public class DlgCadPaciente extends javax.swing.JDialog {
         );
 
         btnLimpar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnLimpar.setForeground(new java.awt.Color(255, 51, 51));
+        btnLimpar.setForeground(new java.awt.Color(204, 0, 0));
         btnLimpar.setText("Limpar");
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -355,9 +367,18 @@ public class DlgCadPaciente extends javax.swing.JDialog {
         });
 
         btnCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnCadastrar.setForeground(new java.awt.Color(51, 102, 255));
+        btnCadastrar.setForeground(new java.awt.Color(0, 0, 153));
         btnCadastrar.setText("Salvar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
+
+        btnAlterar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnAlterar.setForeground(new java.awt.Color(0, 0, 153));
+        btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarActionPerformed(evt);
             }
@@ -368,19 +389,21 @@ public class DlgCadPaciente extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pnDados, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pnDados, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(painelObs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pnEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(pnEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(306, 306, 306)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(152, 152, 152)
+                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -393,15 +416,27 @@ public class DlgCadPaciente extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(painelObs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(pnDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void habilitarBotoes() {
+        if (pacienteSelecionado == null) {
+            btnCadastrar.setVisible(true);
+            btnAlterar.setVisible(false);
+        } else {
+            btnCadastrar.setVisible(false);
+            btnAlterar.setVisible(true);
+        }
+    }
 
     private void limparCampos() {
         txtNome.setText("");
@@ -416,19 +451,46 @@ public class DlgCadPaciente extends javax.swing.JDialog {
         cbUf.setSelectedIndex(-1);
         cbTipoSangue.setSelectedIndex(-1);
         txtAreaObs.setText("");
+        pacienteSelecionado = null;
     }
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         limparCampos();
     }//GEN-LAST:event_btnLimparActionPerformed
 
+    private void preencherCampos(Paciente paciente) throws ParseException {
+        if (paciente != null) {
+            txtNome.setText(paciente.getNome());
+            txtDataNascimento.setText(paciente.getDtNascFormatada());
+            txtCpf.setText(paciente.getCpf());
+
+            if (paciente.getSexo().equals("M")) {
+                radioMasc.setSelected(true);
+            } else {
+                radioFem.setSelected(true);
+            }
+
+            txtCel.setText(paciente.getCelular());
+            txtCep.setText(paciente.getCep());
+            txtCidade.setText(paciente.getCidade());
+            txtRua.setText(paciente.getRua());
+            txtBairro.setText(paciente.getBairro());
+            txtNum.setText(String.valueOf(paciente.getNumero()));
+            cbUf.setSelectedItem(paciente.getUf());
+            cbTipoSangue.setSelectedItem(paciente.getTipoSanguineo());
+            txtAreaObs.setText(paciente.getObservacao());
+
+            habilitarBotoes();
+        }
+    }
+
     private boolean validarCamposPreenchidos() {
 
         boolean valido = true;
         String erro = "";
 
-        if (txtNome.getText().trim().length() == 0) {
-            erro = "O preenchimento do nome é obrigatório.\n";
+        if (txtNome.getText().trim().length() < 4) {
+            erro = "Nome inválido. Preenchimento de nome requer pelo menos 4 caracteres.\n";
             valido = false;
         }
 
@@ -443,7 +505,7 @@ public class DlgCadPaciente extends javax.swing.JDialog {
                 valido = false;
             }
         } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao converter ano de nascimento. " + ex);
+            JOptionPane.showMessageDialog(this, "Erro ao converter ano de nascimento.\n" + ex);
         }
 
 //        if (FuncoesUteis.isCPF(txtCpf.getText()) == false) {
@@ -510,7 +572,7 @@ public class DlgCadPaciente extends javax.swing.JDialog {
         }
 
         if (valido == false) {
-            JOptionPane.showMessageDialog(this, erro, "Dados de cadastro inválidos.", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, erro, "Dados inválidos!", JOptionPane.ERROR_MESSAGE);
         }
         return valido;
     }
@@ -548,22 +610,52 @@ public class DlgCadPaciente extends javax.swing.JDialog {
                 sexo = "F";
             }
 
-            gerIG.gerenciadorDominio.cadastrarPaciente(txtAreaObs.getText(), (String) cbTipoSangue.getSelectedItem(), 
-                    txtNome.getText().toUpperCase(),dataNasc, cpf, sexo, celular, txtCep.getText().replace("-", ""), 
-                    txtCidade.getText().toUpperCase(),txtBairro.getText().toUpperCase(), txtRua.getText().toUpperCase(), 
-                    numResidencia, (String) cbUf.getSelectedItem()
-            );
+            if (pacienteSelecionado == null) {
+                gerIG.gerenciadorDominio.cadastrarPaciente(txtAreaObs.getText(), (String) cbTipoSangue.getSelectedItem(),
+                        txtNome.getText().toUpperCase(), dataNasc, cpf, sexo, celular, txtCep.getText().replace("-", ""),
+                        txtCidade.getText().toUpperCase(), txtBairro.getText().toUpperCase(), txtRua.getText().toUpperCase(),
+                        numResidencia, (String) cbUf.getSelectedItem()
+                );
+            } else {
+                gerIG.gerenciadorDominio.atualizarPaciente(pacienteSelecionado, txtAreaObs.getText(), (String) cbTipoSangue.getSelectedItem(),
+                        txtNome.getText().toUpperCase(), dataNasc, sexo, celular, txtCep.getText().replace("-", ""),
+                        txtCidade.getText().toUpperCase(), txtBairro.getText().toUpperCase(), txtRua.getText().toUpperCase(),
+                        numResidencia, (String) cbUf.getSelectedItem()
+                );
+            }
 
-            JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso.");
-            
+            JOptionPane.showMessageDialog(this, "Paciente salvo com sucesso.");
             limparCampos();
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
+    private void btnPesqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesqActionPerformed
+        try {
+            Pessoa pessoaSelecionada = (Pessoa) gerIG.abrirDlgBuscarPessoa();
+            if (pessoaSelecionada != null && Paciente.class == pessoaSelecionada.getClass()) {
+                pacienteSelecionado = (Paciente) pessoaSelecionada;
+                preencherCampos(pacienteSelecionado);
+            } else if (pessoaSelecionada != null && Paciente.class != pessoaSelecionada.getClass()) {
+                limparCampos();
+                JOptionPane.showMessageDialog(this, "A pessoa selecionada não é um paciente.\n");
+            }
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao preencher campos do paciente pesquisado.\n" + ex);
+        }
+    }//GEN-LAST:event_btnPesqActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        cbUf.setSelectedIndex(-1);
+        cbTipoSangue.setSelectedIndex(-1);
+        habilitarBotoes();
+    }//GEN-LAST:event_formComponentShown
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnCadastrar;
     private javax.swing.ButtonGroup btnGrupoSexo;
     private javax.swing.JButton btnLimpar;
+    private javax.swing.JButton btnPesq;
     private javax.swing.JComboBox<String> cbTipoSangue;
     private javax.swing.JComboBox<String> cbUf;
     private javax.swing.JLabel jLabel1;

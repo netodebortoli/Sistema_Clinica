@@ -75,4 +75,21 @@ public class Especialidade implements Serializable {
     public String toString() {
         return descricao;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Especialidade other = (Especialidade) obj;
+        return this.idEspecialidade == other.idEspecialidade;
+    }
+    
+    
 }

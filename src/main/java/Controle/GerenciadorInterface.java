@@ -1,5 +1,6 @@
 package Controle;
 
+import Dominio.Pessoa;
 import Janelas.*;
 import java.awt.Frame;
 import java.lang.reflect.InvocationTargetException;
@@ -13,7 +14,7 @@ import org.hibernate.HibernateException;
 public class GerenciadorInterface {
 
     private FrmPrincipal frmPrincipal = null;
-    private DlgListarConsulta dlgListarConsultas = null;
+    private DlgBuscarConsulta dlgBuscarConsulta = null;
     private DlgCadPaciente dlgCadPaciente = null;
     private DlgCadMedico dlgCadMedico = null;
     private DlgBuscarPessoa dlgBuscarPessoa = null;
@@ -67,9 +68,10 @@ public class GerenciadorInterface {
     public void abrirDlgAgendarConsulta() {
         abrirJanela(frmPrincipal, dlgAgendarConsulta, DlgAgendarConsulta.class);
     }
-
-    public void abrirDlgBuscarPessoa() {
-        abrirJanela(frmPrincipal, dlgBuscarPessoa, DlgBuscarPessoa.class);
+ 
+    public Pessoa abrirDlgBuscarPessoa() {
+        dlgBuscarPessoa = (DlgBuscarPessoa) abrirJanela(frmPrincipal, dlgBuscarPessoa, DlgBuscarPessoa.class);
+        return dlgBuscarPessoa.getPessoa();
     }
 
     public void abrirDlgCadMedico() {
@@ -81,7 +83,7 @@ public class GerenciadorInterface {
     }
 
     public void abrirDlgListarConsultas() {
-        abrirJanela(frmPrincipal, dlgListarConsultas, DlgListarConsulta.class);
+        abrirJanela(frmPrincipal, dlgBuscarConsulta, DlgBuscarConsulta.class);
     }
 
     public void abrirFrmPrincial() {

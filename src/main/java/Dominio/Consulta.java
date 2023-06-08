@@ -19,11 +19,11 @@ public class Consulta implements Serializable {
     @Column(length = 3, nullable = false)
     private String horario;
 
-    @ManyToOne (fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_medico")
     private Medico medico;
 
-    @ManyToOne (fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_paciente")
     private Paciente paciente;
 
@@ -39,8 +39,9 @@ public class Consulta implements Serializable {
         this.especialidade = especialidade;
 
     }
-    
-    public Consulta() {}
+
+    public Consulta() {
+    }
 
     public int getIdConsulta() {
         return idConsulta;
@@ -84,6 +85,15 @@ public class Consulta implements Serializable {
 
     public void setEspecialidade(Especialidade especialidade) {
         this.especialidade = especialidade;
+    }
+
+    @Override
+    public String toString() {
+        return paciente.getNome();
+    }
+
+    public Object[] toArray() {
+        return new Object[]{this, medico, paciente, especialidade};
     }
 
 }

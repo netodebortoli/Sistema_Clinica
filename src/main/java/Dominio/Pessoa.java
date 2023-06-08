@@ -1,52 +1,52 @@
-
 package Dominio;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.Date;
 import javax.persistence.*;
 
 @Entity
-@Inheritance (strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Pessoa implements Serializable {
-    
+
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column (name = "id_pessoa")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_pessoa")
     private int id;
-    
-    @Column (length = 100, nullable = false, name = "nome_pessoa")
+
+    @Column(length = 100, nullable = false, name = "nome_pessoa")
     private String nome;
-    
-    @Temporal (TemporalType.DATE)
-    @Column (nullable = false, updatable = false, name = "data_nascimento")
+
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false, updatable = false, name = "data_nascimento")
     private Date dataNascimento;
-    
+
 //    @Column (length = 11, nullable = false, updatable = false, unique = true)
-    @Column (length = 11, nullable = false, updatable = false)
+    @Column(length = 11, nullable = false, updatable = false)
     private String cpf;
-    
-    @Column (nullable = false, length = 1)
+
+    @Column(nullable = false, length = 1)
     private String sexo;
 
-    @Column (length = 11)
+    @Column(length = 11)
     private String celular;
-    
-    @Column (length = 9, nullable = false)
+
+    @Column(length = 9, nullable = false)
     private String cep;
-     
-    @Column (nullable = false, length = 50)
+
+    @Column(nullable = false, length = 50)
     private String cidade;
-    
-    @Column (nullable = false, length = 50)
+
+    @Column(nullable = false, length = 50)
     private String bairro;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String rua;
-    
-    @Column (nullable = true)
+
+    @Column(nullable = true)
     private Integer numero;
-    
-    @Column (length = 2, nullable = false)
+
+    @Column(length = 2, nullable = false)
     private String uf;
 
     public Pessoa(String nome, Date dataNascimento, String cpf, String sexo, String celular, String cep, String cidade, String bairro, String rua, Integer numero, String uf) {
@@ -62,8 +62,9 @@ public abstract class Pessoa implements Serializable {
         this.numero = numero;
         this.uf = uf;
     }
-    
-    public Pessoa() {}
+
+    public Pessoa() {
+    }
 
     public int getId() {
         return id;
@@ -159,6 +160,18 @@ public abstract class Pessoa implements Serializable {
 
     @Override
     public String toString() {
-        return nome ;
+        return nome;
+    }
+
+    private String getCpfFormatted() throws ParseException {
+        return Controle.FuncoesUteis.formatterCpf(cpf);
+    }
+
+    public String getDtNascFormatada() throws ParseException {
+        return Controle.FuncoesUteis.dateToStr(dataNascimento);
+    }
+
+    public Object[] toArray() throws ParseException {
+        return new Object[]{this.getClass().getSimpleName(), this, sexo, getCpfFormatted(), getDtNascFormatada()};
     }
 }
