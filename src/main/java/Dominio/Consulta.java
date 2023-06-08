@@ -1,6 +1,7 @@
 package Dominio;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -92,8 +93,12 @@ public class Consulta implements Serializable {
         return paciente.getNome();
     }
 
-    public Object[] toArray() {
-        return new Object[]{this, medico, paciente, especialidade};
+    public String getDtConsultaFormatada() throws ParseException {
+        return Controle.FuncoesUteis.dateToStr(dataConsulta);
+    }
+    
+    public Object[] toArray() throws ParseException {
+        return new Object[]{getDtConsultaFormatada(), medico, this, especialidade};
     }
 
 }

@@ -28,7 +28,7 @@ public class PessoaDao extends GenericoDao {
             Root tabela = consulta.from(classe);
 
             // RESTRIÇÕES
-            Predicate restricoes = builder.like(tabela.get("nome"), "%" + pesq + "%");
+            Predicate restricoes = builder.like(tabela.get("nome"), "%" + pesq.trim().toUpperCase() + "%");
 
             consulta.where(restricoes);
             lista = session.createQuery(consulta).getResultList();

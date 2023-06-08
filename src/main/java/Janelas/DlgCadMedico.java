@@ -6,6 +6,7 @@ import Dominio.Especialidade;
 import Dominio.Medico;
 import Dominio.Pessoa;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JList;
@@ -505,15 +506,26 @@ public class DlgCadMedico extends javax.swing.JDialog {
             cbUf.setSelectedItem(medico.getUf());
             cbUfCrm.setSelectedItem(medico.getCrmUf());
             txtCrm.setText(String.valueOf(medico.getCrm()));
-            setEspecialidades(medico, listaEspecialidades);
+            selecionarEspecialidades(medico, listaEspecialidades);
             habilitarBotoes();
         }
     }
 
-    private void setEspecialidades(Medico medico, JList listaEspecialidadesInterface) {
+    private void selecionarEspecialidades(Medico medico, JList listaEspecialidadesInterface) {
 
-        // FAZER O MÉTODO
+        ArrayList<Integer> indices = new ArrayList();
+        
+        for (Especialidade esp : medico.getEspecialidades()) {
+            for (int i = 0; i < listaEspecialidadesInterface.getModel().getSize(); i++) {
+                if (esp.equals(listaEspecialidadesInterface.getModel().getElementAt(i))) {
+                    indices.add(i);
+                }
+            }
+        }
 
+        int arr[] = indices.stream().mapToInt(i -> i).toArray();
+
+        listaEspecialidadesInterface.setSelectedIndices(arr);
     }
 
 
@@ -672,8 +684,8 @@ public class DlgCadMedico extends javax.swing.JDialog {
                 );
             }
 
-            JOptionPane.showMessageDialog(this, "Médico salvo com sucesso.");
             limparCampos();
+            JOptionPane.showMessageDialog(this, "Médico salvo com sucesso.");
         }
 
     }//GEN-LAST:event_btnCadastrarActionPerformed

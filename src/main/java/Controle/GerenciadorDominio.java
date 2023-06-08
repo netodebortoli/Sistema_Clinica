@@ -110,9 +110,13 @@ public class GerenciadorDominio {
                 lista = consultaDao.pesquisarEspecialidade(pesquisa, tipo);
                 break;
             default:
-                lista = listar(Consulta.class);
+                lista = consultaDao.pesquisarTodas(pesquisa, tipo);
         }
         return lista;
+    }
+
+    public List<Consulta> pesquisarConsulta(String pesquisa, Medico med) throws HibernateException, ParseException {
+        return consultaDao.pesquisarAgendamentos(pesquisa, med);
     }
 
     public List<Pessoa> pesquisarPessoas(String pesquisa, int tipo) {
@@ -120,8 +124,6 @@ public class GerenciadorDominio {
 
         switch (tipo) {
             case 0: //todos
-                //lista = pessoaDao.pesquisarPessoa(Pessoa.class, pesquisa);
-                //lista = listar(Pessoa.class);
                 lista = pessoaDao.pesquisarPessoa(Pessoa.class, pesquisa);
                 break;
             case 1: //medico

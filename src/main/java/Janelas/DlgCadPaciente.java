@@ -624,8 +624,8 @@ public class DlgCadPaciente extends javax.swing.JDialog {
                 );
             }
 
-            JOptionPane.showMessageDialog(this, "Paciente salvo com sucesso.");
             limparCampos();
+            JOptionPane.showMessageDialog(this, "Paciente salvo com sucesso.");
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

@@ -2,6 +2,7 @@ package Dao;
 
 import Controle.FuncoesUteis;
 import Dominio.Consulta;
+import Dominio.Medico;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +17,7 @@ import org.hibernate.Session;
 
 public class ConsultaDao extends GenericoDao {
 
-    private List<Consulta> pesquisar(int tipo, String pesquisa) throws HibernateException, ParseException {
+    private List<Consulta> pesquisarConsulta(int tipo, String pesquisa) throws HibernateException, ParseException {
 
         List<Consulta> lista = new ArrayList();
         Session session = null;
@@ -32,23 +33,31 @@ public class ConsultaDao extends GenericoDao {
             // FROM
             Root tabela = consulta.from(Consulta.class);
 
-            // RESTRIÇÕES
+            // RESTRIÇÕES   
             Predicate restricoes = null;
             Expression exp;
 
             switch (tipo) {
-                case 0:
+                case 0: //data
                     Date dataConsulta = FuncoesUteis.strToDate(pesquisa);
                     exp = tabela.get("dataConsulta");
                     restricoes = builder.equal(exp, dataConsulta);
                     break;
-                case 1:
-//                    exp = tabela.get("medico").get("nome");
-//                    restricoes = builder.equal(exp, pesquisa + "%");
+                case 1: // medico
+                    restricoes = builder.like(tabela.get("medico").get("nome"), "%" + pesquisa.trim().toUpperCase() + "%");
                     break;
-                case 2:
+                case 2: // paciente
+                    restricoes = builder.like(tabela.get("paciente").get("nome"), "%" + pesquisa.trim().toUpperCase() + "%");
                     break;
-                case 3:
+                case 3: // modalidade
+                    restricoes = builder.like(tabela.get("especialidade").get("descricao"), "%" + pesquisa.trim().toUpperCase() + "%");
+                    break;
+                default: // todas
+                    Predicate res[] = new Predicate[3];
+                    res[0] = builder.like(tabela.get("especialidade").get("descricao"), "%" + pesquisa.trim().toUpperCase() + "%");
+                    res[1] = builder.like(tabela.get("paciente").get("nome"), "%" + pesquisa.trim().toUpperCase() + "%");
+                    res[2] = builder.like(tabela.get("medico").get("nome"), "%" + pesquisa.trim().toUpperCase() + "%");
+                    restricoes = builder.or(res);
                     break;
             }
 
@@ -70,19 +79,29 @@ public class ConsultaDao extends GenericoDao {
     }
 
     public List<Consulta> pesquisarData(String pesquisa, int tipoPesquisa) throws HibernateException, ParseException {
-        return pesquisar(tipoPesquisa, pesquisa);
+        return pesquisarConsulta(tipoPesquisa, pesquisa);
     }
 
     public List<Consulta> pesquisarMedico(String pesquisa, int tipoPesquisa) throws HibernateException, ParseException {
-        return pesquisar(tipoPesquisa, pesquisa);
+        return pesquisarConsulta(tipoPesquisa, pesquisa);
     }
 
     public List<Consulta> pesquisarPaciente(String pesquisa, int tipoPesquisa) throws HibernateException, ParseException {
-        return pesquisar(tipoPesquisa, pesquisa);
+        return pesquisarConsulta(tipoPesquisa, pesquisa);
     }
 
     public List<Consulta> pesquisarEspecialidade(String pesquisa, int tipoPesquisa) throws HibernateException, ParseException {
-        return pesquisar(tipoPesquisa, pesquisa);
+        return pesquisarConsulta(tipoPesquisa, pesquisa);
     }
 
+    public List<Consulta> pesquisarTodas(String pesquisa, int tipoPesquisa) throws HibernateException, ParseException {
+        return pesquisarConsulta(tipoPesquisa, pesquisa);
+    }
+
+    public List<Consulta> pesquisarAgendamentos(String pesquisa, Medico med) throws HibernateException, ParseException {
+
+        List<Consulta> lista = new ArrayList();
+
+        return lista;
+    }
 }

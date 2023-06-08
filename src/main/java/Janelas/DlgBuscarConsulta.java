@@ -1,10 +1,14 @@
 package Janelas;
 
 import Controle.GerenciadorInterface;
+import Dominio.Consulta;
 import java.text.ParseException;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -18,7 +22,7 @@ public class DlgBuscarConsulta extends javax.swing.JDialog {
         super(parent, modal);
         this.gerIG = gerIG;
         initComponents();
-        cbTipoConsulta.setSelectedIndex(0);
+        cbTipoConsulta.setSelectedIndex(4);
     }
 
     /**
@@ -37,7 +41,6 @@ public class DlgBuscarConsulta extends javax.swing.JDialog {
         tblConsulta = new javax.swing.JTable();
         btnPesquisar = new javax.swing.JButton();
         txtPesquisa = new javax.swing.JFormattedTextField();
-        btnEditar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -74,6 +77,9 @@ public class DlgBuscarConsulta extends javax.swing.JDialog {
             }
         });
         tblConsulta.setAutoscrolls(false);
+        tblConsulta.setFocusable(false);
+        tblConsulta.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblConsulta.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblConsulta.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblConsulta);
         if (tblConsulta.getColumnModel().getColumnCount() > 0) {
@@ -103,14 +109,20 @@ public class DlgBuscarConsulta extends javax.swing.JDialog {
 
         btnPesquisar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnPesquisar.setText("Pesquisar");
-
-        btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnEditar.setForeground(new java.awt.Color(0, 0, 153));
-        btnEditar.setText("Editar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnExcluir.setForeground(new java.awt.Color(255, 0, 0));
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,11 +130,10 @@ public class DlgBuscarConsulta extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pnlTabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -130,9 +141,10 @@ public class DlgBuscarConsulta extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cbTipoConsulta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(pnlTabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,16 +153,13 @@ public class DlgBuscarConsulta extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(cbTipoConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPesquisar)
-                    .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlTabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -160,9 +169,8 @@ public class DlgBuscarConsulta extends javax.swing.JDialog {
     private void cbTipoConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoConsultaActionPerformed
 
         try {
-            
             txtPesquisa.setValue(null);
-            
+
             if (cbTipoConsulta.getSelectedItem().equals("Data")) {
                 txtPesquisa.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("##/##/####")));
             } else {
@@ -173,8 +181,80 @@ public class DlgBuscarConsulta extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_cbTipoConsultaActionPerformed
 
+    private boolean validarCamposPreenchidos(int tipo) {
+
+        boolean valido = true;
+        String msgErro = "";
+
+        switch (tipo) {
+            case 0:
+                if (txtPesquisa.getText().replaceAll("/", "").trim().length() == 0) {
+                    valido = false;
+                    msgErro += "A data informada é inválida.\n";
+                }
+                break;
+            default:
+                if (txtPesquisa.getText().trim().length() < 4) {
+                    valido = false;
+                    msgErro += "Nome informado inválido.\nPreenchimento de nome requer pelo menos 4 caracteres.\n";
+                }
+                break;
+        }
+
+        if (!valido) {
+            txtPesquisa.setText(null);
+            JOptionPane.showMessageDialog(this, msgErro);
+        }
+        return valido;
+    }
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        if (validarCamposPreenchidos(cbTipoConsulta.getSelectedIndex())) {
+
+            String pesquisa = txtPesquisa.getText();
+            int tipoPesquisa = cbTipoConsulta.getSelectedIndex();
+
+            try {
+                List<Consulta> listaConsultas = gerIG.gerenciadorDominio.pesquisarConsulta(pesquisa, tipoPesquisa);
+
+                ((DefaultTableModel) tblConsulta.getModel()).setRowCount(0);
+                
+                if (listaConsultas.isEmpty()) {
+                    txtPesquisa.setText(null);
+                    JOptionPane.showMessageDialog(this, "Não existe consultas agendadas para a pesquisa solicitada.\n");
+                } else {
+                    for (Consulta c : listaConsultas) {
+                        ((DefaultTableModel) tblConsulta.getModel()).addRow(c.toArray());
+                    }
+                }
+            } catch (HibernateException | ParseException ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao pesquisar consultas.\n");
+            }
+        }
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+
+        int linhaSelecionada = tblConsulta.getSelectedRow();
+
+        if (linhaSelecionada >= 0) {
+
+            Consulta c = (Consulta) tblConsulta.getValueAt(linhaSelecionada, 2);
+
+            if (JOptionPane.showConfirmDialog(this,
+                    "Deseja realmente excluir a consulta?",
+                    "Excluir Consulta", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+                gerIG.gerenciadorDominio.excluir(c);
+                ((DefaultTableModel) tblConsulta.getModel()).removeRow(linhaSelecionada);
+                JOptionPane.showMessageDialog(this, "A consulta foi excluída com sucesso.\n");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Para excluir, selecione uma consulta disponível na tabela.\n");
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JComboBox<String> cbTipoConsulta;
