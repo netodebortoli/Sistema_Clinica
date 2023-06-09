@@ -398,7 +398,8 @@ public class DlgAgendarConsulta extends javax.swing.JDialog {
                 limparCamposTabela();
 
                 if (listaConsultas.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Não há consultas agendadas para o dia informado.\n");
+                    JOptionPane.showMessageDialog(this, "Não há consultas agendadas para o dia informado.\n"
+                            + "Por favor, selecione um horário.");
                 } else {
                     for (Consulta c : listaConsultas) {
                         for (int j = 0; j < tblAgendamentos.getRowCount(); j++) {

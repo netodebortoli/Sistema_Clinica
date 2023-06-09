@@ -522,12 +522,11 @@ public class DlgCadMedico extends javax.swing.JDialog {
                 }
             }
         }
-
+        
         int arr[] = indices.stream().mapToInt(i -> i).toArray();
 
         listaEspecialidadesInterface.setSelectedIndices(arr);
     }
-
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         limparCampos();

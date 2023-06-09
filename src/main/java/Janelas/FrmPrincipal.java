@@ -22,8 +22,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mnuConsulta = new javax.swing.JMenu();
         mnuConsultaAgendar = new javax.swing.JMenuItem();
         mnuConsultaListar = new javax.swing.JMenuItem();
-        mnuBusca = new javax.swing.JMenu();
-        mnuBuscarPessoas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sisclinica - Menu Principal");
@@ -71,19 +69,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(mnuConsulta);
 
-        mnuBusca.setText("Buscar");
-        mnuBusca.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        mnuBuscarPessoas.setText("Pessoas");
-        mnuBuscarPessoas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuBuscarPessoasActionPerformed(evt);
-            }
-        });
-        mnuBusca.add(mnuBuscarPessoas);
-
-        jMenuBar1.add(mnuBusca);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -116,14 +101,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         gerInterfaceGrafica.abrirDlgAgendarConsulta();
     }//GEN-LAST:event_mnuConsultaAgendarActionPerformed
 
-    private void mnuBuscarPessoasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuBuscarPessoasActionPerformed
-        gerInterfaceGrafica.abrirDlgBuscarPessoa();
-    }//GEN-LAST:event_mnuBuscarPessoasActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu mnuBusca;
-    private javax.swing.JMenuItem mnuBuscarPessoas;
     private javax.swing.JMenu mnuCad;
     private javax.swing.JMenuItem mnuCadMed;
     private javax.swing.JMenuItem mnuCadPaciente;

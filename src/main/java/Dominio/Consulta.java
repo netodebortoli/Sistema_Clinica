@@ -98,7 +98,7 @@ public class Consulta implements Serializable {
     }
     
     public Object[] toArray() throws ParseException {
-        return new Object[]{getDtConsultaFormatada(), medico, this, especialidade};
+        return new Object[]{getDtConsultaFormatada(), horario, medico, this, especialidade};
     }
 
 }

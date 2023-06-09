@@ -2,6 +2,7 @@ package Dao;
 
 import Controle.FuncoesUteis;
 import Dominio.Consulta;
+import Dominio.Especialidade;
 import Dominio.Medico;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
@@ -62,6 +64,9 @@ public class ConsultaDao extends GenericoDao {
             }
 
             consulta.where(restricoes);
+            consulta.orderBy(builder.asc(tabela.get("horario")));
+            consulta.orderBy(builder.desc(tabela.get("dataConsulta")));
+
             lista = session.createQuery(consulta).getResultList();
 
             session.getTransaction().commit();
@@ -116,16 +121,16 @@ public class ConsultaDao extends GenericoDao {
             Root tabela = consulta.from(Consulta.class);
 
             // RESTRIÇÕES   
-            Predicate restricoes  = null;
+            Predicate restricoes = null;
             Predicate res[] = new Predicate[2];
             Expression exp;
-            
+
             Date dataConsulta = FuncoesUteis.strToDate(pesquisa);
             exp = tabela.get("dataConsulta");
             res[0] = builder.equal(exp, dataConsulta);
-            
+
             res[1] = builder.like(tabela.get("medico").get("nome"), "%" + med.getNome() + "%");
-            
+
             restricoes = builder.and(res);
 
             consulta.where(restricoes);

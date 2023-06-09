@@ -65,11 +65,11 @@ public class DlgBuscarConsulta extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Data", "Médico", "Paciente", "Modalidade"
+                "Data", "Horario", "Médico", "Paciente", "Modalidade"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -86,9 +86,11 @@ public class DlgBuscarConsulta extends javax.swing.JDialog {
             tblConsulta.getColumnModel().getColumn(0).setResizable(false);
             tblConsulta.getColumnModel().getColumn(0).setPreferredWidth(0);
             tblConsulta.getColumnModel().getColumn(1).setResizable(false);
+            tblConsulta.getColumnModel().getColumn(1).setPreferredWidth(0);
             tblConsulta.getColumnModel().getColumn(2).setResizable(false);
             tblConsulta.getColumnModel().getColumn(3).setResizable(false);
-            tblConsulta.getColumnModel().getColumn(3).setPreferredWidth(0);
+            tblConsulta.getColumnModel().getColumn(4).setResizable(false);
+            tblConsulta.getColumnModel().getColumn(4).setPreferredWidth(0);
         }
 
         javax.swing.GroupLayout pnlTabelaLayout = new javax.swing.GroupLayout(pnlTabela);
@@ -170,6 +172,7 @@ public class DlgBuscarConsulta extends javax.swing.JDialog {
 
         try {
             txtPesquisa.setValue(null);
+            ((DefaultTableModel) tblConsulta.getModel()).setRowCount(0);
 
             if (cbTipoConsulta.getSelectedItem().equals("Data")) {
                 txtPesquisa.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("##/##/####")));
@@ -218,7 +221,7 @@ public class DlgBuscarConsulta extends javax.swing.JDialog {
                 List<Consulta> listaConsultas = gerIG.gerenciadorDominio.pesquisarConsulta(pesquisa, tipoPesquisa);
 
                 ((DefaultTableModel) tblConsulta.getModel()).setRowCount(0);
-                
+
                 if (listaConsultas.isEmpty()) {
                     txtPesquisa.setText(null);
                     JOptionPane.showMessageDialog(this, "Não existe consultas agendadas para a pesquisa solicitada.\n");
@@ -239,7 +242,7 @@ public class DlgBuscarConsulta extends javax.swing.JDialog {
 
         if (linhaSelecionada >= 0) {
 
-            Consulta c = (Consulta) tblConsulta.getValueAt(linhaSelecionada, 2);
+            Consulta c = (Consulta) tblConsulta.getValueAt(linhaSelecionada, 3);
 
             if (JOptionPane.showConfirmDialog(this,
                     "Deseja realmente excluir a consulta?",

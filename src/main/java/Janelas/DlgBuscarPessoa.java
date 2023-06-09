@@ -241,9 +241,13 @@ public class DlgBuscarPessoa extends javax.swing.JDialog {
                 ((DefaultTableModel) tblPessoas.getModel()).setNumRows(0);
 
                 List<Pessoa> listaPessoas = gerIG.gerenciadorDominio.pesquisarPessoas(nomePesquisado, tipoPesquisa);
-                
-                for (Pessoa p : listaPessoas) {
-                    ((DefaultTableModel) tblPessoas.getModel()).addRow(p.toArray());
+
+                if (listaPessoas.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Não há registros para a pesquisa solicitada.");
+                } else {
+                    for (Pessoa p : listaPessoas) {
+                        ((DefaultTableModel) tblPessoas.getModel()).addRow(p.toArray());
+                    }
                 }
             }
         } catch (ParseException ex) {
