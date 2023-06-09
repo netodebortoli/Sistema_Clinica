@@ -102,6 +102,46 @@ public class ConsultaDao extends GenericoDao {
 
         List<Consulta> lista = new ArrayList();
 
+        Session session = null;
+
+        try {
+            session = ConexaoHibernate.getSessionFactory().openSession();
+            session.beginTransaction();
+
+            // Construtor da CONSULTA
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery consulta = builder.createQuery(Consulta.class);
+
+            // FROM
+            Root tabela = consulta.from(Consulta.class);
+
+            // RESTRIÇÕES   
+            Predicate restricoes  = null;
+            Predicate res[] = new Predicate[2];
+            Expression exp;
+            
+            Date dataConsulta = FuncoesUteis.strToDate(pesquisa);
+            exp = tabela.get("dataConsulta");
+            res[0] = builder.equal(exp, dataConsulta);
+            
+            res[1] = builder.like(tabela.get("medico").get("nome"), "%" + med.getNome() + "%");
+            
+            restricoes = builder.and(res);
+
+            consulta.where(restricoes);
+            lista = session.createQuery(consulta).getResultList();
+
+            session.getTransaction().commit();
+            session.close();
+
+        } catch (HibernateException erro) {
+            if (session != null) {
+                session.getTransaction().rollback();
+                session.close();
+            }
+            throw new HibernateException(erro);
+        }
+
         return lista;
     }
 }
