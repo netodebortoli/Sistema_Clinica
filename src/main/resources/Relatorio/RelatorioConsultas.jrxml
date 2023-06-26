@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioConsultas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ddf3c45b-4883-48ea-9f1d-dde8934705e3">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="Style1" backcolor="#C9B2B1" markup="rtf" pattern="">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="especialidade" class="Dominio.Especialidade">
+		<fieldDescription><![CDATA[especialidade]]></fieldDescription>
+	</field>
+	<field name="horario" class="java.lang.String">
+		<fieldDescription><![CDATA[horario]]></fieldDescription>
+	</field>
+	<field name="paciente" class="Dominio.Paciente">
+		<fieldDescription><![CDATA[paciente]]></fieldDescription>
+	</field>
+	<field name="medico" class="Dominio.Medico">
+		<fieldDescription><![CDATA[medico]]></fieldDescription>
+	</field>
+	<field name="dataConsulta" class="java.util.Date">
+		<fieldDescription><![CDATA[dataConsulta]]></fieldDescription>
+	</field>
+	<field name="idConsulta" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idConsulta]]></fieldDescription>
+	</field>
+	<variable name="TOTAL" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="140" y="20" width="280" height="50" uuid="a93b56df-3d85-474f-ad74-32a4db2fb334"/>
+				<textElement>
+					<font size="25"/>
+				</textElement>
+				<text><![CDATA[Relatório das Consultas]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="36" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="30" y="2" width="140" height="20" uuid="3a436e22-c34c-4cb6-8184-99e2580c894a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f92d8baa-299d-4ca0-b89a-c1c52f55ee67"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Modalidade da Consulta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="2" width="180" height="20" uuid="fef4c2dc-6362-4334-a65b-76e060a5c6ad"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de Consultas Registradas]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="30" y="0" width="210" height="20" uuid="6d9d8c40-3c84-4aa6-b687-1ced02b8d4a5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="004be167-30fb-416d-9ee3-102875bef00b"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{especialidade}.getDescricao()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="31" splitType="Stretch">
+			<textField pattern="M/d/yy">
+				<reportElement x="30" y="9" width="100" height="20" uuid="297afd95-6a6b-4310-bdf2-e2754a7d16d6"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="36" splitType="Stretch"/>
+	</summary>
+</jasperReport>

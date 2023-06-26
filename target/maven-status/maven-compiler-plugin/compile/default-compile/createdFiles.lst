@@ -3,6 +3,7 @@ Controle\GerenciadorInterface.class
 Dao\ConsultaDao.class
 Janelas\DlgCadPaciente.class
 Dominio\Paciente.class
+Janelas\DlgBuscarConsulta$3.class
 Janelas\DlgCadPaciente$5.class
 Dominio\Medico.class
 Janelas\FrmPrincipal.class
@@ -16,10 +17,10 @@ Janelas\FrmPrincipal$1.class
 Janelas\DlgCadPaciente$1.class
 Janelas\FrmPrincipal$2.class
 Janelas\DlgAgendarConsulta$7.class
+Janelas\DlgBuscarConsulta$4.class
 Janelas\DlgCadPaciente$4.class
 Dominio\Consulta.class
 Janelas\DlgAgendarConsulta$4.class
-Janelas\FrmPrincipal$5.class
 Janelas\DlgBuscarPessoa$3.class
 Janelas\DlgCadMedico$3.class
 Janelas\DlgBuscarConsulta.class
@@ -36,6 +37,7 @@ Dominio\Especialidade.class
 Dao\ConexaoHibernate.class
 Dao\PessoaDao.class
 Janelas\DlgCadMedico$5.class
+Controle\GerenciadorRelatorio.class
 Janelas\DlgAgendarConsulta$2.class
 Janelas\DlgCadMedico.class
 Janelas\DlgBuscarPessoa$4.class

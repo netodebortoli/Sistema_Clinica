@@ -21,13 +21,19 @@ public class GerenciadorInterface {
     private DlgAgendarConsulta dlgAgendarConsulta = null;
 
     public GerenciadorDominio gerenciadorDominio;
+    public GerenciadorRelatorio gerenciadorRelatorio;
 
     public GerenciadorInterface() {
         gerenciadorDominio = new GerenciadorDominio();
+        gerenciadorRelatorio = new GerenciadorRelatorio();
     }
 
     public GerenciadorDominio getGerenciadorDominio() {
         return gerenciadorDominio;
+    }
+
+    public GerenciadorRelatorio getGerenciadorRelatorio() {
+        return gerenciadorRelatorio;
     }
 
     // ABRIR JDIALOG
@@ -68,7 +74,7 @@ public class GerenciadorInterface {
     public void abrirDlgAgendarConsulta() {
         abrirJanela(frmPrincipal, dlgAgendarConsulta, DlgAgendarConsulta.class);
     }
- 
+
     public Pessoa abrirDlgBuscarPessoa() {
         dlgBuscarPessoa = (DlgBuscarPessoa) abrirJanela(frmPrincipal, dlgBuscarPessoa, DlgBuscarPessoa.class);
         return dlgBuscarPessoa.getPessoa();

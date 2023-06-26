@@ -560,6 +560,7 @@ public class DlgCadMedico extends javax.swing.JDialog {
 //            erro += "CPF inválido.\n";
 //            valido = false;
 //        }
+
         String cpf = txtCpf.getText();
         cpf = cpf.replace(".", "");
         cpf = cpf.replace(".", "");

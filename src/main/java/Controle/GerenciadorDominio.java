@@ -118,6 +118,10 @@ public class GerenciadorDominio {
     public List<Consulta> pesquisarConsulta(String pesquisa, Medico med) throws HibernateException, ParseException {
         return consultaDao.pesquisarAgendamentos(pesquisa, med);
     }
+    
+    public List<Object> pesquisarTotalConsulta() {
+        return consultaDao.pesquisarTotal();
+    }
 
     public List<Pessoa> pesquisarPessoas(String pesquisa, int tipo) {
         List<Pessoa> lista = null;

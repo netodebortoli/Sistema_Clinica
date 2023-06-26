@@ -6,21 +6,17 @@ import org.hibernate.cfg.Configuration;
 
 public class ConexaoHibernate {
 
-    private static final SessionFactory sessionFactory;
-
-    static {
-        try {
-            // Create the SessionFactory from standard (hibernate.cfg.xml) 
-            // config file.
-            sessionFactory = new Configuration().configure().buildSessionFactory();
-        } catch (HibernateException ex) {
-            // Log the exception. 
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
+    private static SessionFactory sessionFactory;
 
     public static SessionFactory getSessionFactory() {
+        if (sessionFactory == null) {
+            try {
+                sessionFactory = new Configuration().configure().buildSessionFactory();
+            } catch (HibernateException ex) {
+                System.err.println("Erro ao criar conexão inicial do SessionFactory.\n" + ex);
+                throw new ExceptionInInitializerError(ex);
+            }
+        }
         return sessionFactory;
     }
 }

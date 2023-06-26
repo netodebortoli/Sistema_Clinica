@@ -260,8 +260,8 @@ public class DlgBuscarPessoa extends javax.swing.JDialog {
         int usuarioSelecionado = tblPessoas.getSelectedRow();
 
         if (usuarioSelecionado >= 0) {
-
-            Pessoa p = (Pessoa) tblPessoas.getValueAt(usuarioSelecionado, 0);
+            
+            Pessoa p = (Pessoa) tblPessoas.getValueAt(usuarioSelecionado, 1);
 
             if (JOptionPane.showConfirmDialog(this,
                     "Deseja realmente excluir a pessoa?",
