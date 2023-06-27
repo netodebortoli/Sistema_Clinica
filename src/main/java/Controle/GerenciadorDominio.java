@@ -41,8 +41,8 @@ public class GerenciadorDominio {
         genericoDao.cadastrar(paciente);
     }
 
-    public void cadastrarConsulta(Date dataConsulta, String horario, Medico medico, Paciente paciente, Especialidade especialidade) {
-        Consulta consulta = new Consulta(dataConsulta, horario, medico, paciente, especialidade);
+    public void cadastrarConsulta(Date dataConsulta, String horario, Medico medico, Paciente paciente, Especialidade especialidade, Double preco, int tipoConsulta) {
+        Consulta consulta = new Consulta(dataConsulta, horario, medico, paciente, especialidade, tipoConsulta, preco);
         genericoDao.cadastrar(consulta);
     }
 
@@ -118,7 +118,7 @@ public class GerenciadorDominio {
     public List<Consulta> pesquisarConsulta(String pesquisa, Medico med) throws HibernateException, ParseException {
         return consultaDao.pesquisarAgendamentos(pesquisa, med);
     }
-    
+
     public List<Object> pesquisarTotalConsulta() {
         return consultaDao.pesquisarTotal();
     }
